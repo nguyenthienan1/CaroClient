@@ -35,12 +35,12 @@ public class ReadMessage {
 		try {
 			for (int i = 0; i < 20; i++) {
 				for (int j = 0; j < 20; j++) {
-					CaroClient.boardFrame.board.matrix[i][j] = m.reader().readShort();
+					CaroClient.boardFrame.boardPanel.matrix[i][j] = m.reader().readShort();
 				}
 			}
-			CaroClient.boardFrame.board.flagPiece.x = m.reader().readInt();
-			CaroClient.boardFrame.board.flagPiece.y = m.reader().readInt();
-			CaroClient.boardFrame.panelBoard.repaint();
+			CaroClient.boardFrame.boardPanel.flagPiece.x = m.reader().readInt();
+			CaroClient.boardFrame.boardPanel.flagPiece.y = m.reader().readInt();
+			CaroClient.boardFrame.boardPanel.repaint();
 		} catch (Exception e) {
 		}
 	}
@@ -81,10 +81,11 @@ public class ReadMessage {
 	public void setChatRoom(Message m) {
 		try {
 			String content = m.reader().readUTF();
-			content = CaroClient.boardFrame.txtFieldChat.getText() + content + "\n";
-			CaroClient.boardFrame.txtFieldChat.setText(content);
+			content = CaroClient.boardFrame.textShowChat.getText() + content + "\n";
+			CaroClient.boardFrame.textShowChat.setText(content);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 }

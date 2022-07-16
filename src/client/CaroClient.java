@@ -6,6 +6,7 @@ import caro.BoardFrame;
 import caro.ConnectFrame;
 import caro.LoginFrame;
 import caro.RoomFrame;
+import caro.mImage;
 import io.Session;
 
 public class CaroClient {
@@ -25,6 +26,7 @@ public class CaroClient {
 
 	public static void main(String[] args) {
 		setLAF();
+		new mImage().loadImage();
 		connectFrame = new ConnectFrame();
 		loginFrame = new LoginFrame();
 		roomFrame = new RoomFrame();

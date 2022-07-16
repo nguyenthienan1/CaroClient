@@ -1,23 +1,13 @@
 package caro;
 
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import client.GlobalService;
 
 import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JTextField;
-import java.awt.Font;
-import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
@@ -25,57 +15,54 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JTextArea;
-import javax.swing.UIManager;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.FlowLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.Font;
 
 public class BoardFrame extends JFrame {
 	private static final long serialVersionUID = -8413011714717794876L;
-	public Board board = new Board(500, 500);
-	public JPanel panelBoard;
 	public JPanel contentPane;
-	public JTextArea txtFieldChat;
+	private JTextField textChat;
+	public JTextArea textShowChat;
+	public BoardPanel boardPanel;
 
 	public BoardFrame() {
-		setResizable(false);
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showConfirmDialog(null, "Do you want to out this room?", "Close room",
-						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					GlobalService.gI().LeaveRoom();
-				}
-			}
-		});
-		setBounds(100, 100, 800, 600);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setBounds(0, 0, 1000, 800);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		JMenu mnNewMenu = new JMenu("New menu");
+		menuBar.add(mnNewMenu);
+
+		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
+		mnNewMenu.add(mntmNewMenuItem);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(64, 224, 208));
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 
-		panelBoard = new JPanel() {
-			private static final long serialVersionUID = -6877477921746367220L;
-			@Override
-			public void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				board.paint(g);
-			}
-		};
-		panelBoard.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				Point p = e.getPoint();
-				int x = p.x / board.cellSize;
-				int y = p.y / board.cellSize;
-				GlobalService.gI().Piece(x, y);
-				// System.out.println("X: " + x + " Y: " + y);
+		boardPanel = new BoardPanel();
+		boardPanel.setBackground(Color.WHITE);
+		FlowLayout flowLayout = (FlowLayout) boardPanel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+
+		JButton btnReady = new JButton("Ready");
+		btnReady.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GlobalService.gI().Ready();
 			}
 		});
-		panelBoard.setBackground(UIManager.getColor("info"));
-		panelBoard.setBounds(10, 10, 501, 501);
-		contentPane.add(panelBoard);
 
-		JTextField textChat = new JTextField();
+		JScrollPane scrollPane = new JScrollPane();
+
+		textChat = new JTextField();
 		textChat.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -88,18 +75,9 @@ public class BoardFrame extends JFrame {
 				}
 			}
 		});
-		textChat.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		textChat.setBounds(541, 445, 144, 26);
-		contentPane.add(textChat);
 		textChat.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("Chat:");
-		lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		lblNewLabel.setBounds(541, 154, 55, 16);
-		contentPane.add(lblNewLabel);
-
 		JButton btnSendChat = new JButton("Send");
-		btnSendChat.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnSendChat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String content = textChat.getText();
@@ -109,29 +87,40 @@ public class BoardFrame extends JFrame {
 				}
 			}
 		});
-		btnSendChat.setBounds(541, 483, 98, 26);
-		contentPane.add(btnSendChat);
-
-		JButton btnReady = new JButton("Ready");
-		btnReady.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnReady.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				GlobalService.gI().Ready();
-			}
-		});
-		btnReady.setBounds(541, 10, 98, 26);
-		contentPane.add(btnReady);
-
-		JScrollPane scrollPaneChat = new JScrollPane();
-		scrollPaneChat.setBounds(541, 181, 221, 253);
-		contentPane.add(scrollPaneChat);
-
-		txtFieldChat = new JTextArea();
-		txtFieldChat.setBackground(new Color(224, 255, 255));
-		txtFieldChat.setForeground(new Color(30, 144, 255));
-		txtFieldChat.setEditable(false);
-		txtFieldChat.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		txtFieldChat.setLineWrap(true);
-		scrollPaneChat.setViewportView(txtFieldChat);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(boardPanel, GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+					.addGap(31)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnReady)
+						.addComponent(textChat, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnSendChat))
+					.addGap(8))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(btnReady)
+					.addPreferredGap(ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE)
+					.addGap(44)
+					.addComponent(textChat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnSendChat)
+					.addGap(34))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(boardPanel, GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		
+		textShowChat = new JTextArea();
+		textShowChat.setFont(new Font("Arial", Font.PLAIN, 16));
+		textShowChat.setWrapStyleWord(true);
+		textShowChat.setLineWrap(true);
+		scrollPane.setViewportView(textShowChat);
+		contentPane.setLayout(gl_contentPane);
 	}
 }
