@@ -3,6 +3,7 @@ package caro;
 import javax.swing.JPanel;
 
 import client.GlobalService;
+import lib.mImage;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -18,6 +19,7 @@ public class BoardPanel extends JPanel {
 	public Point flagPiece = new Point(-1, -1);
 
 	public BoardPanel() {
+		setBackground(new Color(240, 240, 240));
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -37,10 +39,6 @@ public class BoardPanel extends JPanel {
 	protected void paintChildren(Graphics g) {
 		super.paintChildren(g);
 		int cellSize = getHeight() / edge;
-		
-		g.setColor(new Color(240, 240, 240));
-		g.fillRect(0, 0, cellSize * edge, cellSize * edge);
-		
 		g.setColor(Color.BLACK);
 		for (int i = 0; i <= edge; i++) {
 			g.drawLine(i * cellSize, 0, i * cellSize, cellSize * edge);

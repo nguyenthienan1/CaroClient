@@ -3,7 +3,7 @@ package client;
 import io.Cmd_Server2Client;
 import io.Message;
 
-public class HandleMessage {
+public class HandleMessage extends Cmd_Server2Client{
 	private static HandleMessage instance;
 
 	public static HandleMessage gI() {
@@ -17,6 +17,9 @@ public class HandleMessage {
 		switch (m.command) {
 		case Cmd_Server2Client.LOGIN:
 			ReadMessage.gI().loginOk();
+			break;
+		case Cmd_Server2Client.LOG_OUT_OK:
+			ReadMessage.gI().logOutOk();
 			break;
 		case Cmd_Server2Client.SHOW_MESSAGE_DIALOG:
 			ReadMessage.gI().showMessageDialog(m);

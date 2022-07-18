@@ -1,36 +1,27 @@
 package client;
 
-import javax.swing.UIManager;
+import java.awt.EventQueue;
 
-import caro.BoardFrame;
-import caro.ConnectFrame;
-import caro.LoginFrame;
-import caro.RoomFrame;
-import caro.mImage;
+import caro.RegisterFrame;
 import io.Session;
+import lib.mImage;
+import lib.mWindow;
 
 public class CaroClient {
 	public static Session conn = new Session();
-	public static ConnectFrame connectFrame;
-	public static BoardFrame boardFrame;
-	public static LoginFrame loginFrame;
-	public static RoomFrame roomFrame;
-
-	public static void setLAF() {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			System.err.println("Failed to set LookAndFeel");
-		}
-	}
+	public static mWindow window = new mWindow();
+	public static RegisterFrame registerFrame = new RegisterFrame();
 
 	public static void main(String[] args) {
-		setLAF();
-		new mImage().loadImage();
-		connectFrame = new ConnectFrame();
-		loginFrame = new LoginFrame();
-		roomFrame = new RoomFrame();
-		boardFrame = new BoardFrame();
-		connectFrame.setVisible(true);
+		mImage.gI().loadImage();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					window.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

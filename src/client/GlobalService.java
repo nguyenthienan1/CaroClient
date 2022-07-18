@@ -5,7 +5,7 @@ import java.io.IOException;
 import io.Cmd_Client2Server;
 import io.Message;
 
-public class GlobalService {
+public class GlobalService extends Cmd_Client2Server {
 	private static GlobalService instance;
 
 	public static GlobalService gI() {
@@ -24,6 +24,23 @@ public class GlobalService {
 			m.cleanup();
 		} catch (IOException e) {
 		}
+	}
+
+	public void Register(String user, String pass, String repass) {
+		try {
+			Message m = new Message(Cmd_Client2Server.REGISTER);
+			m.writer().writeUTF(user);
+			m.writer().writeUTF(pass);
+			m.writer().writeUTF(repass);
+			CaroClient.conn.sendMessage(m);
+			m.cleanup();
+		} catch (IOException e) {
+		}
+	}
+
+	public void LogOut() {
+		Message m = new Message(Cmd_Client2Server.LOG_OUT);
+		CaroClient.conn.sendMessage(m);
 	}
 
 	public void Piece(int x, int y) {
@@ -62,7 +79,6 @@ public class GlobalService {
 			CaroClient.conn.sendMessage(m);
 			m.cleanup();
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 
@@ -72,7 +88,6 @@ public class GlobalService {
 			CaroClient.conn.sendMessage(m);
 			m.cleanup();
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 
@@ -92,7 +107,6 @@ public class GlobalService {
 			CaroClient.conn.sendMessage(m);
 			m.cleanup();
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 }
