@@ -1,4 +1,4 @@
-package caro;
+package ui;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -21,11 +21,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+
+import caro.Board;
+
 import java.awt.Font;
 
 public class GameUI extends JPanel {
 	private static final long serialVersionUID = -9076187580180368445L;
-	public BoardPanel boardPanel;
+	public Board board;
 	private JButton btnReady;
 	private JTextField textChat;
 	private JButton btnSendChat;
@@ -41,8 +44,8 @@ public class GameUI extends JPanel {
 	 */
 	public GameUI() {
 		
-		boardPanel = new BoardPanel();
-		boardPanel.setBackground(Color.WHITE);
+		board = new Board();
+		board.setBackground(new Color(238, 238, 238));
 		
 		btnReady = new JButton("Ready");
 		btnReady.addActionListener(new ActionListener() {
@@ -86,7 +89,7 @@ public class GameUI extends JPanel {
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(boardPanel, GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
+					.addComponent(board, GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
 					.addGap(32)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(textChat, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
@@ -112,7 +115,7 @@ public class GameUI extends JPanel {
 							.addComponent(textChat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(btnSendChat))
-						.addComponent(boardPanel, GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE))
+						.addComponent(board, GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		

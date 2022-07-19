@@ -5,9 +5,9 @@ import java.util.Vector;
 
 import javax.swing.*;
 
-import caro.GameUI;
 import caro.Room;
 import io.Message;
+import ui.GameUI;
 
 public class ReadMessage {
 	private static ReadMessage instance;
@@ -38,12 +38,12 @@ public class ReadMessage {
 		try {
 			for (int i = 0; i < 20; i++) {
 				for (int j = 0; j < 20; j++) {
-					CaroClient.window.gameUI.boardPanel.matrix[i][j] = m.reader().readShort();
+					CaroClient.window.gameUI.board.matrix[i][j] = m.reader().readShort();
 				}
 			}
-			CaroClient.window.gameUI.boardPanel.flagPiece.x = m.reader().readInt();
-			CaroClient.window.gameUI.boardPanel.flagPiece.y = m.reader().readInt();
-			CaroClient.window.gameUI.boardPanel.repaint();
+			CaroClient.window.gameUI.board.flagPiece.x = m.reader().readInt();
+			CaroClient.window.gameUI.board.flagPiece.y = m.reader().readInt();
+			CaroClient.window.gameUI.board.repaint();
 		} catch (Exception e) {
 		}
 	}
@@ -64,7 +64,8 @@ public class ReadMessage {
 			for (int i = 0; i < size; i++) {
 				int rN = m.reader().readInt();
 				int s = m.reader().readInt();
-				Room r = new Room(rN, s);
+				boolean f = m.reader().readBoolean();
+				Room r = new Room(rN, s, f);
 				listRooms.add(r);
 			}
 			CaroClient.window.roomUI.jlistRoom.setListData(listRooms);

@@ -12,14 +12,14 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class BoardPanel extends JPanel {
+public class Board extends JPanel {
 	private static final long serialVersionUID = 1440930565921598349L;
 	public int edge = 20;
 	public int[][] matrix = new int[20][20];
 	public Point flagPiece = new Point(-1, -1);
 
-	public BoardPanel() {
-		setBackground(new Color(240, 240, 240));
+	public Board() {
+		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

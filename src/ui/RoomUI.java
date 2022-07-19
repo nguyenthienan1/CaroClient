@@ -1,4 +1,4 @@
-package caro;
+package ui;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import caro.Room;
 import client.GlobalService;
 
 import javax.swing.JList;
@@ -116,6 +117,7 @@ public class RoomUI extends JPanel {
 		imenuLogOut.add(mntmNewMenuItem);
 		
 		jlistRoom = new JList<>();
+		jlistRoom.setCellRenderer(new RoomRenderer());
 		scrollPane.setViewportView(jlistRoom);
 		setLayout(groupLayout);
 

@@ -2,10 +2,10 @@ package client;
 
 import java.awt.EventQueue;
 
-import caro.RegisterFrame;
 import io.Session;
 import lib.mImage;
 import lib.mWindow;
+import ui.RegisterFrame;
 
 public class CaroClient {
 	public static Session conn = new Session();

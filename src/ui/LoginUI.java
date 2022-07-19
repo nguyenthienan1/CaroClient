@@ -1,4 +1,4 @@
-package caro;
+package ui;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;

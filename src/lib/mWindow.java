@@ -5,10 +5,10 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import caro.GameUI;
-import caro.ConnectUI;
-import caro.LoginUI;
-import caro.RoomUI;
+import ui.ConnectUI;
+import ui.GameUI;
+import ui.LoginUI;
+import ui.RoomUI;
 
 public class mWindow extends JFrame {
 	private static final long serialVersionUID = 8560587936628025228L;
@@ -24,7 +24,7 @@ public class mWindow extends JFrame {
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-				int exit = JOptionPane.showConfirmDialog(null, "Do you want exit game?", "Exit",
+				int exit = JOptionPane.showConfirmDialog(null, "Exit game?", "Warning",
 						JOptionPane.YES_NO_OPTION);
 				if (exit == JOptionPane.YES_OPTION) {
 					System.exit(0);
