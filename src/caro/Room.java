@@ -18,7 +18,7 @@ public class Room {
 	public int getNumOfPlayer() {
 		return NumPlayers;
 	}
-	
+
 	public String getStatus() {
 		return Status ? "Fight" : "Wait";
 	}

@@ -50,18 +50,17 @@ public class Session {
 	private void sendMessageThread() {
 		new Thread(() -> {
 			Message m;
-			while (connected) {
-				try {
+			try {
+				while (connected) {
 					m = DataQueue.poll(5, TimeUnit.SECONDS);
 					if (m != null) {
 						doSendMessage(m);
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
-					disconnect();
-					break;
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+			disconnect();
 			DataQueue.clear();
 			dos = null;
 		}).start();
@@ -77,7 +76,6 @@ public class Session {
 					HandleMessage.gI().processMessage(message);
 				}
 			} catch (Exception e) {
-				disconnect();
 				e.printStackTrace();
 			}
 			disconnect();
@@ -101,7 +99,7 @@ public class Session {
 		int size = dis.readInt();
 		byte[] data = new byte[size];
 		if (size > 0) {
-			dis.readFully(data);
+			dis.read(data);
 		}
 		return new Message(cmd, data);
 	}

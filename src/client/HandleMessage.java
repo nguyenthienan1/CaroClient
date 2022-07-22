@@ -3,7 +3,7 @@ package client;
 import io.Cmd_Server2Client;
 import io.Message;
 
-public class HandleMessage extends Cmd_Server2Client{
+public class HandleMessage extends Cmd_Server2Client {
 	private static HandleMessage instance;
 
 	public static HandleMessage gI() {
@@ -34,7 +34,7 @@ public class HandleMessage extends Cmd_Server2Client{
 			ReadMessage.gI().listRoom(m);
 			break;
 		case Cmd_Server2Client.LEAVE_ROOM_OK:
-			ReadMessage.gI().closeBoard();
+			ReadMessage.gI().leaveRoomOk();
 			break;
 		case Cmd_Server2Client.CHAT_ROOM:
 			ReadMessage.gI().setChatRoom(m);

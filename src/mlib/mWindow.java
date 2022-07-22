@@ -1,4 +1,4 @@
-package lib;
+package mlib;
 
 import java.awt.Container;
 
@@ -12,10 +12,10 @@ import ui.RoomUI;
 
 public class mWindow extends JFrame {
 	private static final long serialVersionUID = 8560587936628025228L;
-	public ConnectUI connectUI;
-	public LoginUI loginUI;
-	public RoomUI roomUI;
-	public GameUI gameUI;
+	public ConnectUI connectUI = new ConnectUI();
+	public LoginUI loginUI = new LoginUI();
+	public RoomUI roomUI = new RoomUI();
+	public GameUI gameUI = new GameUI();
 
 	public mWindow() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -24,40 +24,33 @@ public class mWindow extends JFrame {
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-				int exit = JOptionPane.showConfirmDialog(null, "Exit game?", "Warning",
-						JOptionPane.YES_NO_OPTION);
+				int exit = JOptionPane.showConfirmDialog(null, "Exit game?", "Warning", JOptionPane.YES_NO_OPTION);
 				if (exit == JOptionPane.YES_OPTION) {
 					System.exit(0);
 				}
 			}
 		});
-		connectUI = new ConnectUI();
-		loginUI = new LoginUI();
-		roomUI = new RoomUI();
-		gameUI = new GameUI();
-		setConnectUI();
 	}
-	
-	@Override
-	public void setContentPane(Container contentPane) {
-		super.setContentPane(contentPane);
+
+	private void setPanel(Container panel) {
+		setContentPane(panel);
 		pack();
 	}
 
 	public void setConnectUI() {
-		setContentPane(connectUI);
+		setPanel(connectUI);
 	}
 
 	public void setLoginUI() {
-		setContentPane(loginUI);
+		setPanel(loginUI);
 	}
 
 	public void setRoomUI() {
-		setContentPane(roomUI);
+		setPanel(roomUI);
 	}
 
-	public void setBoardUI() {
-		setContentPane(gameUI);
+	public void setGameUI() {
+		setPanel(gameUI);
 	}
 
 }

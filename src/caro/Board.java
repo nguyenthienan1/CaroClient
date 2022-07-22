@@ -2,8 +2,8 @@ package caro;
 
 import javax.swing.JPanel;
 
-import client.GlobalService;
-import lib.mImage;
+import client.SendMessage;
+import mlib.mImage;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,12 +14,11 @@ import java.awt.event.MouseEvent;
 
 public class Board extends JPanel {
 	private static final long serialVersionUID = 1440930565921598349L;
-	public int edge = 20;
+	private int edge = 20;
 	public int[][] matrix = new int[20][20];
 	public Point flagPiece = new Point(-1, -1);
 
 	public Board() {
-		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -29,7 +28,7 @@ public class Board extends JPanel {
 				int x = p.x / cellSize;
 				int y = p.y / cellSize;
 				if (x < 20 && y < 20) {
-					GlobalService.gI().Piece(x, y);
+					SendMessage.gI().Piece(x, y);
 				}
 			}
 		});
@@ -37,7 +36,6 @@ public class Board extends JPanel {
 
 	@Override
 	protected void paintChildren(Graphics g) {
-		super.paintChildren(g);
 		int cellSize = getHeight() / edge;
 		g.setColor(Color.BLACK);
 		for (int i = 0; i <= edge; i++) {
@@ -46,6 +44,7 @@ public class Board extends JPanel {
 		}
 		paintFlagPiece(g);
 		paintPiece(g);
+		super.paintChildren(g);
 	}
 
 	private void paintPiece(Graphics g) {
@@ -64,7 +63,6 @@ public class Board extends JPanel {
 			}
 		} catch (Exception e) {
 		}
-
 	}
 
 	private void paintFlagPiece(Graphics g) {

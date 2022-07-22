@@ -22,7 +22,7 @@ public class ReadMessage {
 	public void loginOk() {
 		CaroClient.window.setRoomUI();
 	}
-	
+
 	public void logOutOk() {
 		CaroClient.window.setLoginUI();
 	}
@@ -38,12 +38,10 @@ public class ReadMessage {
 		try {
 			for (int i = 0; i < 20; i++) {
 				for (int j = 0; j < 20; j++) {
-					CaroClient.window.gameUI.board.matrix[i][j] = m.reader().readShort();
+					CaroClient.window.gameUI.setPiece(i, j, m.reader().readShort());
 				}
 			}
-			CaroClient.window.gameUI.board.flagPiece.x = m.reader().readInt();
-			CaroClient.window.gameUI.board.flagPiece.y = m.reader().readInt();
-			CaroClient.window.gameUI.board.repaint();
+			CaroClient.window.gameUI.setFlagPiece(m.reader().readInt(), m.reader().readInt());
 		} catch (Exception e) {
 		}
 	}
@@ -52,37 +50,34 @@ public class ReadMessage {
 		try {
 			m.reader().readInt();
 			CaroClient.window.gameUI = new GameUI();
-			CaroClient.window.setBoardUI();
+			CaroClient.window.setGameUI();
 		} catch (Exception e) {
 		}
 	}
 
 	public void listRoom(Message m) {
 		try {
-			Vector<Room> listRooms = new Vector<Room>();
+			Vector<Room> vRooms = new Vector<Room>();
 			int size = m.reader().readInt();
 			for (int i = 0; i < size; i++) {
 				int rN = m.reader().readInt();
 				int s = m.reader().readInt();
 				boolean f = m.reader().readBoolean();
-				Room r = new Room(rN, s, f);
-				listRooms.add(r);
+				vRooms.add(new Room(rN, s, f));
 			}
-			CaroClient.window.roomUI.jlistRoom.setListData(listRooms);
+			CaroClient.window.roomUI.setListRoom(vRooms);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void closeBoard() {
+	public void leaveRoomOk() {
 		CaroClient.window.setRoomUI();
 	}
 
 	public void setChatRoom(Message m) {
 		try {
-			String content = m.reader().readUTF();
-			content = CaroClient.window.gameUI.textShowChat.getText() + content + "\n";
-			CaroClient.window.gameUI.textShowChat.setText(content);
+			CaroClient.window.gameUI.addTextChat(m.reader().readUTF());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
