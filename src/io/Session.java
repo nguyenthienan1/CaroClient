@@ -112,7 +112,7 @@ public class Session {
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(null, "Error connect to server");
-			CaroClient.window.setConnectUI();
+			CaroClient.window.setContentPane(CaroClient.connectUI);
 			connected = false;
 		}
 	}

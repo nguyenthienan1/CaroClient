@@ -54,7 +54,7 @@ public class RoomUI extends JPanel {
 		btnCreateRoom = new JButton("Create room");
 		btnCreateRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SendMessage.gI().CreateRoom();
+				SendMessage.gI().createRoom();
 			}
 		});
 		btnCreateRoom.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -63,7 +63,7 @@ public class RoomUI extends JPanel {
 		btnJoinRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					SendMessage.gI().JoinRoom(jlistRoom.getSelectedValue().getNumber());
+					SendMessage.gI().joinRoom(jlistRoom.getSelectedValue().getNumber());
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Please select room");
 				}
@@ -74,7 +74,7 @@ public class RoomUI extends JPanel {
 		btnUpdateLRoom = new JButton("Update list room");
 		btnUpdateLRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SendMessage.gI().UpdateListRoom();
+				SendMessage.gI().updateListRoom();
 			}
 		});
 		btnUpdateLRoom.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -119,7 +119,7 @@ public class RoomUI extends JPanel {
 		mntmNewMenuItem = new JMenuItem("Log out");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SendMessage.gI().LogOut();
+				SendMessage.gI().logOut();
 			}
 		});
 		imenuLogOut.add(mntmNewMenuItem);

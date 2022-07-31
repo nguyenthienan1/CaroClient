@@ -15,6 +15,7 @@ import client.CaroClient;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ConnectUI extends JPanel {
 	private static final long serialVersionUID = -8529188793389411079L;
@@ -55,10 +56,10 @@ public class ConnectUI extends JPanel {
 					if (!CaroClient.conn.connected) {
 						CaroClient.conn.Connect(ip, port);
 						JOptionPane.showMessageDialog(null, "Connect success");
-						CaroClient.window.setLoginUI();
+						CaroClient.window.setContentPane(CaroClient.loginUI);
 					} else {
 						JOptionPane.showMessageDialog(null, "You are already connected");
-						CaroClient.window.setRoomUI();
+						CaroClient.window.setContentPane(CaroClient.loginUI);
 					}
 				} catch (IOException ex) {
 					JOptionPane.showMessageDialog(null, "Can't connect to server, check ip and port then try again");
@@ -66,36 +67,48 @@ public class ConnectUI extends JPanel {
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(61).addGroup(groupLayout
-						.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(textFieldIp, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(33)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(textFieldPort, 0, 0, Short.MAX_VALUE).addComponent(btnNewButton,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-						.addContainerGap(41, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(35, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE)
-						.addGap(31)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-						.addGap(26)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addGap(3).addComponent(lblNewLabel))
-								.addComponent(textFieldIp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addGap(21).addComponent(lblNewLabel_1))
-								.addGroup(groupLayout.createSequentialGroup().addGap(18).addComponent(textFieldPort,
-										GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)))
-						.addGap(18).addComponent(btnNewButton).addContainerGap(27, Short.MAX_VALUE)));
+							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(47)
+									.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(52)
+									.addComponent(textFieldPort, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+									.addGap(5)))
+							.addGap(83))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+							.addGap(26)
+							.addComponent(textFieldIp, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+							.addGap(48)))
+					.addGap(33))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(23)
+					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+					.addGap(29)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textFieldIp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel))
+					.addGap(10)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textFieldPort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_1))
+					.addGap(27)
+					.addComponent(btnNewButton)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		setLayout(groupLayout);
 
 	}

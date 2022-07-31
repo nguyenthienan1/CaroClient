@@ -44,13 +44,10 @@ public class GameUI extends JPanel {
 	 */
 	public GameUI() {
 
-		board = new Board();
-		board.setBackground(new Color(238, 238, 238));
-
 		btnReady = new JButton("Ready");
 		btnReady.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SendMessage.gI().Ready();
+				SendMessage.gI().ready();
 			}
 		});
 
@@ -76,32 +73,52 @@ public class GameUI extends JPanel {
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBorder(new TitledBorder(null, "Chat", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		
+				board = new Board();
+				board.setBackground(new Color(238, 238, 238));
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(board, GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE).addGap(32)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textChat, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-								.addComponent(btnSendChat, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnReady, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
-						.addContainerGap())
-				.addGroup(Alignment.LEADING,
-						groupLayout.createSequentialGroup()
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(449, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
-				groupLayout.createSequentialGroup()
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE).addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addComponent(btnReady).addGap(257)
-										.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-										.addGap(68)
-										.addComponent(textChat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addGap(18).addComponent(btnSendChat))
-								.addComponent(board, GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE))
-						.addContainerGap()));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(board, GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+							.addGap(26)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(0, 0, Short.MAX_VALUE)
+									.addComponent(btnSendChat, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+									.addGap(123))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(0, 0, Short.MAX_VALUE)
+									.addComponent(btnReady, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+									.addGap(115))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(textChat, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+										.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))
+									.addGap(25))))
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE))
+					.addGap(0))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnReady)
+							.addGap(146)
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+							.addGap(68)
+							.addComponent(textChat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnSendChat))
+						.addComponent(board, GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE))
+					.addContainerGap())
+		);
 
 		textShowChat = new JTextArea();
 		textShowChat.setWrapStyleWord(true);
@@ -123,7 +140,7 @@ public class GameUI extends JPanel {
 				int out = JOptionPane.showConfirmDialog(null, "Do you want out this room?", "Leave room",
 						JOptionPane.YES_NO_OPTION);
 				if (out == JOptionPane.YES_OPTION) {
-					SendMessage.gI().LeaveRoom();
+					SendMessage.gI().leaveRoom();
 				}
 			}
 		});
@@ -135,7 +152,7 @@ public class GameUI extends JPanel {
 		String content = textChat.getText();
 		textChat.setText("");
 		if (!content.equals("")) {
-			SendMessage.gI().ChatRoom(content);
+			SendMessage.gI().chatRoom(content);
 		}
 	}
 

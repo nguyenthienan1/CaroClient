@@ -15,28 +15,28 @@ public class HandleMessage extends Cmd_Server2Client {
 
 	public void processMessage(Message m) {
 		switch (m.command) {
-		case Cmd_Server2Client.LOGIN:
-			ReadMessage.gI().loginOk();
+		case LOGIN:
+			ReadMessage.gI().loginSuccess();
 			break;
-		case Cmd_Server2Client.LOG_OUT_OK:
-			ReadMessage.gI().logOutOk();
+		case LOG_OUT_SUCCESS:
+			ReadMessage.gI().logOutSuccess();
 			break;
-		case Cmd_Server2Client.SHOW_MESSAGE_DIALOG:
+		case SHOW_MESSAGE_DIALOG:
 			ReadMessage.gI().showMessageDialog(m);
 			break;
-		case Cmd_Server2Client.SEND_BOARD:
+		case SEND_BOARD:
 			ReadMessage.gI().setBoard(m);
 			break;
-		case Cmd_Server2Client.JOIN_ROOM_OK:
-			ReadMessage.gI().joinRoomOk(m);
+		case JOIN_ROOM_SUCCESS:
+			ReadMessage.gI().joinRoomSuccess(m);
 			break;
-		case Cmd_Server2Client.SEND_LIST_ROOM:
-			ReadMessage.gI().listRoom(m);
+		case SEND_LIST_ROOM:
+			ReadMessage.gI().setListRoom(m);
 			break;
-		case Cmd_Server2Client.LEAVE_ROOM_OK:
-			ReadMessage.gI().leaveRoomOk();
+		case LEAVE_ROOM_SUCCESS:
+			ReadMessage.gI().leaveRoomSuccess();
 			break;
-		case Cmd_Server2Client.CHAT_ROOM:
+		case CHAT_ROOM:
 			ReadMessage.gI().setChatRoom(m);
 			break;
 		}

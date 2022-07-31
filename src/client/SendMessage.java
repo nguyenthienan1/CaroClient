@@ -29,7 +29,7 @@ public class SendMessage extends Cmd_Client2Server {
 		CaroClient.conn.sendMessage(message);
 	}
 
-	public void Login(String username, String password) {
+	public void login(String username, String password) {
 		try {
 			init(LOGIN);
 			writer().writeUTF(username);
@@ -39,7 +39,7 @@ public class SendMessage extends Cmd_Client2Server {
 		}
 	}
 
-	public void Register(String user, String pass, String repass) {
+	public void register(String user, String pass, String repass) {
 		try {
 			init(REGISTER);
 			writer().writeUTF(user);
@@ -50,7 +50,7 @@ public class SendMessage extends Cmd_Client2Server {
 		}
 	}
 
-	public void LogOut() {
+	public void logOut() {
 		try {
 			init(LOG_OUT);
 			send();
@@ -58,7 +58,7 @@ public class SendMessage extends Cmd_Client2Server {
 		}
 	}
 
-	public void Piece(int x, int y) {
+	public void piece(int x, int y) {
 		try {
 			init(PIECE);
 			writer().writeInt(x);
@@ -68,7 +68,7 @@ public class SendMessage extends Cmd_Client2Server {
 		}
 	}
 
-	public void CreateRoom() {
+	public void createRoom() {
 		try {
 			init(CREATE_ROOM);
 			send();
@@ -76,7 +76,7 @@ public class SendMessage extends Cmd_Client2Server {
 		}
 	}
 
-	public void JoinRoom(int RoomNumber) {
+	public void joinRoom(int RoomNumber) {
 		try {
 			init(JOIN_ROOM);
 			writer().writeInt(RoomNumber);
@@ -85,7 +85,7 @@ public class SendMessage extends Cmd_Client2Server {
 		}
 	}
 
-	public void UpdateListRoom() {
+	public void updateListRoom() {
 		try {
 			init(UPDATE_LIST_ROOM);
 			send();
@@ -93,7 +93,7 @@ public class SendMessage extends Cmd_Client2Server {
 		}
 	}
 
-	public void LeaveRoom() {
+	public void leaveRoom() {
 		try {
 			init(LEAVE_ROOM);
 			send();
@@ -101,7 +101,7 @@ public class SendMessage extends Cmd_Client2Server {
 		}
 	}
 
-	public void ChatRoom(String content) {
+	public void chatRoom(String content) {
 		try {
 			init(CHAT_ROOM);
 			writer().writeUTF(content);
@@ -110,7 +110,7 @@ public class SendMessage extends Cmd_Client2Server {
 		}
 	}
 
-	public void Ready() {
+	public void ready() {
 		try {
 			init(READY);
 			send();

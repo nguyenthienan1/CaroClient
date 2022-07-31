@@ -19,12 +19,12 @@ public class ReadMessage {
 		return instance;
 	}
 
-	public void loginOk() {
-		CaroClient.window.setRoomUI();
+	public void loginSuccess() {
+		CaroClient.window.setContentPane(CaroClient.roomUI);
 	}
 
-	public void logOutOk() {
-		CaroClient.window.setLoginUI();
+	public void logOutSuccess() {
+		CaroClient.window.setContentPane(CaroClient.loginUI);
 	}
 
 	public void showMessageDialog(Message m) {
@@ -38,24 +38,24 @@ public class ReadMessage {
 		try {
 			for (int i = 0; i < 20; i++) {
 				for (int j = 0; j < 20; j++) {
-					CaroClient.window.gameUI.setPiece(i, j, m.reader().readShort());
+					CaroClient.gameUI.setPiece(i, j, m.reader().readShort());
 				}
 			}
-			CaroClient.window.gameUI.setFlagPiece(m.reader().readInt(), m.reader().readInt());
+			CaroClient.gameUI.setFlagPiece(m.reader().readInt(), m.reader().readInt());
 		} catch (Exception e) {
 		}
 	}
 
-	public void joinRoomOk(Message m) {
+	public void joinRoomSuccess(Message m) {
 		try {
 			m.reader().readInt();
-			CaroClient.window.gameUI = new GameUI();
-			CaroClient.window.setGameUI();
+			CaroClient.gameUI = new GameUI();
+			CaroClient.window.setContentPane(CaroClient.gameUI);
 		} catch (Exception e) {
 		}
 	}
 
-	public void listRoom(Message m) {
+	public void setListRoom(Message m) {
 		try {
 			Vector<Room> vRooms = new Vector<Room>();
 			int size = m.reader().readInt();
@@ -65,19 +65,19 @@ public class ReadMessage {
 				boolean f = m.reader().readBoolean();
 				vRooms.add(new Room(rN, s, f));
 			}
-			CaroClient.window.roomUI.setListRoom(vRooms);
+			CaroClient.roomUI.setListRoom(vRooms);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void leaveRoomOk() {
-		CaroClient.window.setRoomUI();
+	public void leaveRoomSuccess() {
+		CaroClient.window.setContentPane(CaroClient.roomUI);
 	}
 
 	public void setChatRoom(Message m) {
 		try {
-			CaroClient.window.gameUI.addTextChat(m.reader().readUTF());
+			CaroClient.gameUI.addTextChat(m.reader().readUTF());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -8,15 +8,7 @@ import javax.imageio.ImageIO;
 public class mImage {
 	public static Image imgX;
 	public static Image imgO;
-	public static mImage instance;
-
-	public static mImage gI() {
-		if (instance == null) {
-			instance = new mImage();
-		}
-		return instance;
-	}
-
+	
 	public void loadImage() {
 		try {
 			imgX = ImageIO.read(getClass().getResourceAsStream("/image/X.png"));

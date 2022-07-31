@@ -56,7 +56,7 @@ public class LoginUI extends JPanel {
 				if (username.equals("") || password.equals("")) {
 					JOptionPane.showMessageDialog(null, "Please input user name and password");
 				} else {
-					SendMessage.gI().Login(username, password);
+					SendMessage.gI().login(username, password);
 				}
 			}
 		});
@@ -88,43 +88,54 @@ public class LoginUI extends JPanel {
 		lblSignUp.setForeground(Color.RED);
 		lblSignUp.setFont(new Font("Tahoma", Font.ITALIC, 12));
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
-				.createSequentialGroup().addGap(43)
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addGap(110)
-								.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE).addGap(81))
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(43)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-								.addGap(2).addComponent(tfUserName, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+							.addGap(2)
+							.addComponent(tfUserName, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-								.addGap(10)
-								.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)))
-				.addGap(76))
-				.addGroup(
-						groupLayout.createSequentialGroup().addGap(145)
-								.addComponent(btnSignIn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addGap(151))
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap(292, Short.MAX_VALUE)
-						.addComponent(lblSignUp, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addGap(40)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(tfUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-						.addGap(31)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addGap(3).addComponent(lblNewLabel_2))
-								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addGap(18).addComponent(btnSignIn, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE).addComponent(lblSignUp)
-						.addContainerGap()));
+							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
+					.addGap(76))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(301, Short.MAX_VALUE)
+					.addComponent(lblSignUp, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(150)
+					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+					.addGap(160))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(143)
+					.addComponent(btnSignIn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(153))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+					.addGap(40)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(tfUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+					.addGap(31)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblNewLabel_2))
+						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(btnSignIn, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+					.addComponent(lblSignUp)
+					.addContainerGap())
+		);
 		setLayout(groupLayout);
 
 	}

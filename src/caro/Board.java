@@ -23,20 +23,31 @@ public class Board extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
-				int cellSize = getHeight() / edge;
+				int cellSize = getCellSize();
 				Point p = e.getPoint();
 				int x = p.x / cellSize;
 				int y = p.y / cellSize;
 				if (x < 20 && y < 20) {
-					SendMessage.gI().Piece(x, y);
+					SendMessage.gI().piece(x, y);
 				}
 			}
 		});
 	}
+	
+	private int getCellSize() {
+		int cellSizeCol = getHeight() / edge;
+		int cellSizeRow = getWidth() / edge;
+		if (cellSizeCol < cellSizeRow) {
+			return cellSizeCol;
+		}
+		else {
+			return cellSizeRow;
+		}
+	}
 
 	@Override
 	protected void paintChildren(Graphics g) {
-		int cellSize = getHeight() / edge;
+		int cellSize = getCellSize();
 		g.setColor(Color.BLACK);
 		for (int i = 0; i <= edge; i++) {
 			g.drawLine(i * cellSize, 0, i * cellSize, cellSize * edge);
@@ -48,7 +59,7 @@ public class Board extends JPanel {
 	}
 
 	private void paintPiece(Graphics g) {
-		int cellSize = getHeight() / edge;
+		int cellSize = getCellSize();
 		try {
 			Image X = mImage.imgX.getScaledInstance(cellSize, cellSize, Image.SCALE_SMOOTH);
 			Image O = mImage.imgO.getScaledInstance(cellSize, cellSize, Image.SCALE_SMOOTH);
@@ -66,7 +77,7 @@ public class Board extends JPanel {
 	}
 
 	private void paintFlagPiece(Graphics g) {
-		int cellSize = getHeight() / edge;
+		int cellSize = getCellSize();
 		if (flagPiece.x != -1 && flagPiece.y != -1) {
 			g.setColor(Color.DARK_GRAY);
 			g.fillRect(flagPiece.x * cellSize, flagPiece.y * cellSize, cellSize, cellSize);
