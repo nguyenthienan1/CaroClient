@@ -39,6 +39,9 @@ public class HandleMessage extends Cmd_Server2Client {
 		case CHAT_ROOM:
 			ReadMessage.gI().setChatRoom(m);
 			break;
+		case RESET_BOARD:
+			ReadMessage.gI().resetBoard();
+			break;
 		}
 	}
 }

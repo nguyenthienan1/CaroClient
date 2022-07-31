@@ -1,8 +1,6 @@
 package ui;
 
 import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -15,7 +13,9 @@ import client.CaroClient;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class ConnectUI extends JPanel {
 	private static final long serialVersionUID = -8529188793389411079L;
@@ -30,22 +30,55 @@ public class ConnectUI extends JPanel {
 	 * Create the panel.
 	 */
 	public ConnectUI() {
-
-		lblNewLabel = new JLabel("IP:");
-
-		textFieldIp = new JTextField();
-		textFieldIp.setText("127.0.0.1");
-		textFieldIp.setColumns(10);
-
-		lblNewLabel_1 = new JLabel("PORT:");
-
-		textFieldPort = new JTextField();
-		textFieldPort.setText("8888");
-		textFieldPort.setColumns(10);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[] { 113, 0, 0, 117, 0 };
+		gridBagLayout.rowHeights = new int[] { 83, 38, 36, 28, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		setLayout(gridBagLayout);
 
 		lblNewLabel_2 = new JLabel("WELCOME TO CARO GAME");
 		lblNewLabel_2.setForeground(new Color(220, 20, 60));
 		lblNewLabel_2.setFont(new Font("Segoe Script", Font.BOLD, 16));
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_2.gridx = 2;
+		gbc_lblNewLabel_2.gridy = 0;
+		add(lblNewLabel_2, gbc_lblNewLabel_2);
+
+		lblNewLabel = new JLabel("IP:");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 1;
+		add(lblNewLabel, gbc_lblNewLabel);
+
+		textFieldIp = new JTextField();
+		textFieldIp.setText("127.0.0.1");
+		textFieldIp.setColumns(10);
+		GridBagConstraints gbc_textFieldIp = new GridBagConstraints();
+		gbc_textFieldIp.fill = GridBagConstraints.BOTH;
+		gbc_textFieldIp.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldIp.gridx = 2;
+		gbc_textFieldIp.gridy = 1;
+		add(textFieldIp, gbc_textFieldIp);
+
+		lblNewLabel_1 = new JLabel("PORT:");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_1.gridx = 1;
+		gbc_lblNewLabel_1.gridy = 2;
+		add(lblNewLabel_1, gbc_lblNewLabel_1);
+
+		textFieldPort = new JTextField();
+		textFieldPort.setText("8888");
+		textFieldPort.setColumns(10);
+		GridBagConstraints gbc_textFieldPort = new GridBagConstraints();
+		gbc_textFieldPort.fill = GridBagConstraints.BOTH;
+		gbc_textFieldPort.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldPort.gridx = 2;
+		gbc_textFieldPort.gridy = 2;
+		add(textFieldPort, gbc_textFieldPort);
 
 		btnNewButton = new JButton("Connect");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -66,50 +99,11 @@ public class ConnectUI extends JPanel {
 				}
 			}
 		});
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(33)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(47)
-									.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(52)
-									.addComponent(textFieldPort, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-									.addGap(5)))
-							.addGap(83))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-							.addGap(26)
-							.addComponent(textFieldIp, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-							.addGap(48)))
-					.addGap(33))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(23)
-					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-					.addGap(29)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textFieldIp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel))
-					.addGap(10)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textFieldPort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1))
-					.addGap(27)
-					.addComponent(btnNewButton)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		setLayout(groupLayout);
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.gridx = 2;
+		gbc_btnNewButton.gridy = 3;
+		add(btnNewButton, gbc_btnNewButton);
 
 	}
 }

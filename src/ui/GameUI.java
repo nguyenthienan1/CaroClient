@@ -1,8 +1,6 @@
 package ui;
 
 import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -14,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.BoxLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -25,6 +22,10 @@ import javax.swing.border.TitledBorder;
 import caro.Board;
 
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.BorderLayout;
 
 public class GameUI extends JPanel {
 	private static final long serialVersionUID = -9076187580180368445L;
@@ -32,26 +33,70 @@ public class GameUI extends JPanel {
 	private JButton btnReady;
 	private JTextField textChat;
 	private JButton btnSendChat;
-	private JPanel panel;
-	private JMenuBar menuBar;
 	private JMenu iMenuLeaveRoom;
 	private JMenuItem mntmNewMenuItem;
 	private JScrollPane scrollPane;
 	private JTextArea textShowChat;
+	private JPanel panel_1;
+	private JMenuBar menuBar;
 
 	/**
 	 * Create the panel.
 	 */
 	public GameUI() {
 
+		board = new Board();
+		board.setBackground(new Color(238, 238, 238));
+
+		panel_1 = new JPanel();
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[] { 200, 0 };
+		gbl_panel_1.rowHeights = new int[] { 26, 452, 20, 26, 0 };
+		gbl_panel_1.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panel_1.setLayout(gbl_panel_1);
+
 		btnReady = new JButton("Ready");
+		GridBagConstraints gbc_btnReady = new GridBagConstraints();
+		gbc_btnReady.anchor = GridBagConstraints.WEST;
+		gbc_btnReady.insets = new Insets(0, 0, 5, 0);
+		gbc_btnReady.gridx = 0;
+		gbc_btnReady.gridy = 0;
+		panel_1.add(btnReady, gbc_btnReady);
 		btnReady.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SendMessage.gI().ready();
 			}
 		});
+		setLayout(new BorderLayout(10, 10));
+		add(board, BorderLayout.CENTER);
+		board.setLayout(null);
+		add(panel_1, BorderLayout.EAST);
+
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 1;
+		panel_1.add(scrollPane, gbc_scrollPane);
+		scrollPane.setBorder(new TitledBorder(null, "Chat", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+
+		textShowChat = new JTextArea();
+		textShowChat.setColumns(10);
+		textShowChat.setEditable(false);
+		textShowChat.setWrapStyleWord(true);
+		textShowChat.setFont(new Font("Dialog", Font.PLAIN, 16));
+		textShowChat.setLineWrap(true);
+		scrollPane.setViewportView(textShowChat);
 
 		textChat = new JTextField();
+		GridBagConstraints gbc_textChat = new GridBagConstraints();
+		gbc_textChat.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textChat.insets = new Insets(0, 0, 5, 0);
+		gbc_textChat.gridx = 0;
+		gbc_textChat.gridy = 2;
+		panel_1.add(textChat, gbc_textChat);
 		textChat.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -63,73 +108,14 @@ public class GameUI extends JPanel {
 		textChat.setColumns(10);
 
 		btnSendChat = new JButton("Send");
-		btnSendChat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				eventSendChat();
-			}
-		});
-
-		panel = new JPanel();
-
-		scrollPane = new JScrollPane();
-		scrollPane.setBorder(new TitledBorder(null, "Chat", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		
-				board = new Board();
-				board.setBackground(new Color(238, 238, 238));
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(board, GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
-							.addGap(26)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(0, 0, Short.MAX_VALUE)
-									.addComponent(btnSendChat, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-									.addGap(123))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(0, 0, Short.MAX_VALUE)
-									.addComponent(btnReady, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-									.addGap(115))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(textChat, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-										.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))
-									.addGap(25))))
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE))
-					.addGap(0))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnReady)
-							.addGap(146)
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
-							.addGap(68)
-							.addComponent(textChat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnSendChat))
-						.addComponent(board, GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-
-		textShowChat = new JTextArea();
-		textShowChat.setWrapStyleWord(true);
-		textShowChat.setFont(new Font("Dialog", Font.PLAIN, 16));
-		textShowChat.setBorder(null);
-		textShowChat.setLineWrap(true);
-		scrollPane.setViewportView(textShowChat);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		GridBagConstraints gbc_btnSendChat = new GridBagConstraints();
+		gbc_btnSendChat.anchor = GridBagConstraints.WEST;
+		gbc_btnSendChat.gridx = 0;
+		gbc_btnSendChat.gridy = 3;
+		panel_1.add(btnSendChat, gbc_btnSendChat);
 
 		menuBar = new JMenuBar();
-		panel.add(menuBar);
+		add(menuBar, BorderLayout.NORTH);
 
 		iMenuLeaveRoom = new JMenu("Menu");
 		menuBar.add(iMenuLeaveRoom);
@@ -145,7 +131,11 @@ public class GameUI extends JPanel {
 			}
 		});
 		iMenuLeaveRoom.add(mntmNewMenuItem);
-		setLayout(groupLayout);
+		btnSendChat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				eventSendChat();
+			}
+		});
 	}
 
 	private void eventSendChat() {
@@ -168,5 +158,11 @@ public class GameUI extends JPanel {
 	public void addTextChat(String text) {
 		String content = textShowChat.getText() + text + "\n";
 		textShowChat.setText(content);
+	}
+
+	public void resetBoard() {
+		board.matrix = new int[20][20];
+		board.flagPiece.setLocation(-1, -1);
+		board.repaint();
 	}
 }

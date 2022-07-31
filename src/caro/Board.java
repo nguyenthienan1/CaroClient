@@ -33,14 +33,13 @@ public class Board extends JPanel {
 			}
 		});
 	}
-	
+
 	private int getCellSize() {
 		int cellSizeCol = getHeight() / edge;
 		int cellSizeRow = getWidth() / edge;
 		if (cellSizeCol < cellSizeRow) {
 			return cellSizeCol;
-		}
-		else {
+		} else {
 			return cellSizeRow;
 		}
 	}

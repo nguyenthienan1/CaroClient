@@ -83,4 +83,10 @@ public class ReadMessage {
 		}
 	}
 
+	public void resetBoard() {
+		if (CaroClient.window.getContentPane() == CaroClient.gameUI) {
+			CaroClient.gameUI.resetBoard();
+		}
+	}
+
 }
