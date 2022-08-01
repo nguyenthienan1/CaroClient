@@ -1,30 +1,30 @@
 package caro;
 
 public class Room {
-	private int RoomNumber;
-	private int NumPlayers;
-	private boolean Status;
+	private int roomNumber;
+	private int numPlayers;
+	private boolean status;
 
-	public Room(int roomNum, int numPlayer, boolean status) {
-		RoomNumber = roomNum;
-		NumPlayers = numPlayer;
-		Status = status;
+	public Room(int number, int numplayer, boolean stas) {
+		roomNumber = number;
+		numPlayers = numplayer;
+		status = stas;
 	}
 
 	public int getNumber() {
-		return RoomNumber;
+		return roomNumber;
 	}
 
 	public int getNumOfPlayer() {
-		return NumPlayers;
+		return numPlayers;
 	}
 
 	public String getStatus() {
-		return Status ? "Fight" : "Wait";
+		return status ? "fighting" : "waiting";
 	}
 
 	@Override
 	public String toString() {
-		return "Room number: " + RoomNumber + " - " + "Number of players: " + NumPlayers;
+		return "Room number: " + roomNumber + " - " + "Number of players: " + numPlayers;
 	}
 }

@@ -3,7 +3,7 @@ package caro;
 import javax.swing.JPanel;
 
 import client.SendMessage;
-import mlib.mImage;
+import mlib.MyImage;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -60,8 +60,8 @@ public class Board extends JPanel {
 	private void paintPiece(Graphics g) {
 		int cellSize = getCellSize();
 		try {
-			Image X = mImage.imgX.getScaledInstance(cellSize, cellSize, Image.SCALE_SMOOTH);
-			Image O = mImage.imgO.getScaledInstance(cellSize, cellSize, Image.SCALE_SMOOTH);
+			Image X = MyImage.imgX.getScaledInstance(cellSize, cellSize, Image.SCALE_SMOOTH);
+			Image O = MyImage.imgO.getScaledInstance(cellSize, cellSize, Image.SCALE_SMOOTH);
 			for (int i = 0; i < matrix.length; i++) {
 				for (int j = 0; j < matrix[i].length; j++) {
 					if (matrix[i][j] == 1) {

@@ -57,6 +57,7 @@ public class GameUI extends JPanel {
 		panel_1.setLayout(gbl_panel_1);
 
 		btnReady = new JButton("Ready");
+		btnReady.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnReady = new GridBagConstraints();
 		gbc_btnReady.anchor = GridBagConstraints.WEST;
 		gbc_btnReady.insets = new Insets(0, 0, 5, 0);
@@ -86,11 +87,12 @@ public class GameUI extends JPanel {
 		textShowChat.setColumns(10);
 		textShowChat.setEditable(false);
 		textShowChat.setWrapStyleWord(true);
-		textShowChat.setFont(new Font("Dialog", Font.PLAIN, 16));
+		textShowChat.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		textShowChat.setLineWrap(true);
 		scrollPane.setViewportView(textShowChat);
 
 		textChat = new JTextField();
+		textChat.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		GridBagConstraints gbc_textChat = new GridBagConstraints();
 		gbc_textChat.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textChat.insets = new Insets(0, 0, 5, 0);
@@ -108,6 +110,7 @@ public class GameUI extends JPanel {
 		textChat.setColumns(10);
 
 		btnSendChat = new JButton("Send");
+		btnSendChat.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnSendChat = new GridBagConstraints();
 		gbc_btnSendChat.anchor = GridBagConstraints.WEST;
 		gbc_btnSendChat.gridx = 0;

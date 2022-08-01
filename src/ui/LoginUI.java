@@ -19,6 +19,8 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class LoginUI extends JPanel {
 	private static final long serialVersionUID = 2542937514118548359L;
@@ -29,6 +31,8 @@ public class LoginUI extends JPanel {
 	private JLabel lblNewLabel_2;
 	private JPasswordField passwordField;
 	private JLabel lblSignUp;
+	private Component verticalStrut;
+	private Component verticalStrut_1;
 
 	/**
 	 * Create the panel.
@@ -36,73 +40,64 @@ public class LoginUI extends JPanel {
 	public LoginUI() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 76, 82, 251, 55, 67, 0 };
-		gridBagLayout.rowHeights = new int[] { 75, 42, 42, 31, 29, 20, 0 };
+		gridBagLayout.rowHeights = new int[] { 27, 0, 42, 18, 42, 0, 29, 20, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		lblNewLabel_1 = new JLabel("Login");
 		lblNewLabel_1.setForeground(new Color(199, 21, 133));
-		lblNewLabel_1.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		lblNewLabel_1.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 26));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.gridheight = 2;
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 2;
 		gbc_lblNewLabel_1.gridy = 0;
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 
 		lblNewLabel = new JLabel("Username:");
+		lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 1;
+		gbc_lblNewLabel.gridy = 2;
 		add(lblNewLabel, gbc_lblNewLabel);
 
 		tfUserName = new JTextField();
+		tfUserName.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		tfUserName.setText("admin");
 		tfUserName.setColumns(10);
 		GridBagConstraints gbc_tfUserName = new GridBagConstraints();
 		gbc_tfUserName.fill = GridBagConstraints.BOTH;
 		gbc_tfUserName.insets = new Insets(0, 0, 5, 5);
 		gbc_tfUserName.gridx = 2;
-		gbc_tfUserName.gridy = 1;
+		gbc_tfUserName.gridy = 2;
 		add(tfUserName, gbc_tfUserName);
+		
+		verticalStrut = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
+		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut.gridx = 2;
+		gbc_verticalStrut.gridy = 3;
+		add(verticalStrut, gbc_verticalStrut);
 
 		lblNewLabel_2 = new JLabel("Password:");
+		lblNewLabel_2.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_2.gridx = 1;
-		gbc_lblNewLabel_2.gridy = 2;
+		gbc_lblNewLabel_2.gridy = 4;
 		add(lblNewLabel_2, gbc_lblNewLabel_2);
 
 		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		passwordField.setText("admin");
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.fill = GridBagConstraints.BOTH;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordField.gridx = 2;
-		gbc_passwordField.gridy = 2;
+		gbc_passwordField.gridy = 4;
 		add(passwordField, gbc_passwordField);
-
-		btnSignIn = new JButton("Sign in");
-		btnSignIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String username = tfUserName.getText();
-				String password = String.valueOf(passwordField.getPassword());
-				username = username.trim();
-				password = password.trim();
-				if (username.equals("") || password.equals("")) {
-					JOptionPane.showMessageDialog(null, "Please input user name and password");
-				} else {
-					SendMessage.gI().login(username, password);
-				}
-			}
-		});
-		btnSignIn.setForeground(Color.BLACK);
-		GridBagConstraints gbc_btnSignIn = new GridBagConstraints();
-		gbc_btnSignIn.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSignIn.gridx = 2;
-		gbc_btnSignIn.gridy = 3;
-		add(btnSignIn, gbc_btnSignIn);
 
 		lblSignUp = new JLabel("Sign up?");
 		lblSignUp.addMouseListener(new MouseAdapter() {
@@ -122,13 +117,42 @@ public class LoginUI extends JPanel {
 				lblSignUp.setForeground(Color.BLUE);
 			}
 		});
+		
+				btnSignIn = new JButton("Sign in");
+				btnSignIn.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+				btnSignIn.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String username = tfUserName.getText();
+						String password = String.valueOf(passwordField.getPassword());
+						username = username.trim();
+						password = password.trim();
+						if (username.equals("") || password.equals("")) {
+							JOptionPane.showMessageDialog(null, "Please input user name and password");
+						} else {
+							SendMessage.gI().login(username, password);
+						}
+					}
+				});
+				
+				verticalStrut_1 = Box.createVerticalStrut(20);
+				GridBagConstraints gbc_verticalStrut_1 = new GridBagConstraints();
+				gbc_verticalStrut_1.insets = new Insets(0, 0, 5, 5);
+				gbc_verticalStrut_1.gridx = 2;
+				gbc_verticalStrut_1.gridy = 5;
+				add(verticalStrut_1, gbc_verticalStrut_1);
+				btnSignIn.setForeground(Color.BLACK);
+				GridBagConstraints gbc_btnSignIn = new GridBagConstraints();
+				gbc_btnSignIn.insets = new Insets(0, 0, 5, 5);
+				gbc_btnSignIn.gridx = 2;
+				gbc_btnSignIn.gridy = 6;
+				add(btnSignIn, gbc_btnSignIn);
 		lblSignUp.setForeground(Color.RED);
-		lblSignUp.setFont(new Font("Tahoma", Font.ITALIC, 13));
+		lblSignUp.setFont(new Font("Segoe UI", Font.ITALIC, 18));
 		GridBagConstraints gbc_lblSignUp = new GridBagConstraints();
 		gbc_lblSignUp.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblSignUp.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSignUp.gridx = 3;
-		gbc_lblSignUp.gridy = 4;
+		gbc_lblSignUp.gridy = 6;
 		add(lblSignUp, gbc_lblSignUp);
 
 	}

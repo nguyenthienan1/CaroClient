@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class mImage {
+public class MyImage {
 	public static Image imgX;
 	public static Image imgO;
 

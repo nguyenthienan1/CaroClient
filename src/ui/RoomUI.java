@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
+import javax.swing.border.TitledBorder;
+import java.awt.FlowLayout;
 
 public class RoomUI extends JPanel {
 	private static final long serialVersionUID = 2449280938065755409L;
@@ -34,8 +36,8 @@ public class RoomUI extends JPanel {
 	private JButton btnJoinRoom;
 	private JButton btnUpdateLRoom;
 	private JList<Room> jlistRoom;
-	private JMenu imenuLogOut;
-	private JMenuItem mntmNewMenuItem;
+	private JMenu imenuMn;
+	private JMenuItem mntmLogOut;
 	private JMenuBar menuBar_1;
 	private JPanel panel;
 
@@ -46,6 +48,7 @@ public class RoomUI extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 
 		scrollPane = new JScrollPane();
+		scrollPane.setBorder(new TitledBorder(null, "List Room", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		scrollPane.setEnabled(true);
 
 		jlistRoom = new JList<>();
@@ -56,18 +59,20 @@ public class RoomUI extends JPanel {
 		menuBar_1 = new JMenuBar();
 		add(menuBar_1, BorderLayout.NORTH);
 
-		imenuLogOut = new JMenu("Menu");
-		menuBar_1.add(imenuLogOut);
+		imenuMn = new JMenu("Menu");
+		menuBar_1.add(imenuMn);
 
-		mntmNewMenuItem = new JMenuItem("Log out");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		mntmLogOut = new JMenuItem("Log out");
+		mntmLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SendMessage.gI().logOut();
 			}
 		});
-		imenuLogOut.add(mntmNewMenuItem);
+		imenuMn.add(mntmLogOut);
 
 		panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setHgap(10);
 		add(panel, BorderLayout.SOUTH);
 
 		btnCreateRoom = new JButton("Create room");
@@ -77,7 +82,7 @@ public class RoomUI extends JPanel {
 				SendMessage.gI().createRoom();
 			}
 		});
-		btnCreateRoom.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnCreateRoom.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		btnJoinRoom = new JButton("Join room");
 		panel.add(btnJoinRoom);
@@ -90,7 +95,7 @@ public class RoomUI extends JPanel {
 				}
 			}
 		});
-		btnJoinRoom.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnJoinRoom.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		btnUpdateLRoom = new JButton("Update list room");
 		panel.add(btnUpdateLRoom);
@@ -99,7 +104,7 @@ public class RoomUI extends JPanel {
 				SendMessage.gI().updateListRoom();
 			}
 		});
-		btnUpdateLRoom.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnUpdateLRoom.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 	}
 
