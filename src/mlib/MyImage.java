@@ -11,8 +11,8 @@ public class MyImage {
 
 	public void loadImage() {
 		try {
-			imgX = ImageIO.read(getClass().getResourceAsStream("/image/X.png"));
-			imgO = ImageIO.read(getClass().getResourceAsStream("/image/O.png"));
+			imgX = ImageIO.read(getClass().getResource("/image/X.png"));
+			imgO = ImageIO.read(getClass().getResource("/image/O.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

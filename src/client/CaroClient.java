@@ -24,8 +24,7 @@ public class CaroClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		MyImage mImage = new MyImage();
-		mImage.loadImage();
+		new MyImage().loadImage();
 		window = new MyWindow();
 		connectUI = new ConnectUI();
 		loginUI = new LoginUI();

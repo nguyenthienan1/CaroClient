@@ -40,9 +40,9 @@ public class LoginUI extends JPanel {
 	public LoginUI() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 76, 82, 251, 55, 67, 0 };
-		gridBagLayout.rowHeights = new int[] { 27, 0, 42, 18, 42, 0, 29, 20, 0 };
+		gridBagLayout.rowHeights = new int[] { 27, 0, 42, 18, 42, 0, 29, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		lblNewLabel_1 = new JLabel("Login");
@@ -142,7 +142,7 @@ public class LoginUI extends JPanel {
 				add(verticalStrut_1, gbc_verticalStrut_1);
 				btnSignIn.setForeground(Color.BLACK);
 				GridBagConstraints gbc_btnSignIn = new GridBagConstraints();
-				gbc_btnSignIn.insets = new Insets(0, 0, 5, 5);
+				gbc_btnSignIn.insets = new Insets(0, 0, 0, 5);
 				gbc_btnSignIn.gridx = 2;
 				gbc_btnSignIn.gridy = 6;
 				add(btnSignIn, gbc_btnSignIn);
@@ -150,7 +150,7 @@ public class LoginUI extends JPanel {
 		lblSignUp.setFont(new Font("Segoe UI", Font.ITALIC, 18));
 		GridBagConstraints gbc_lblSignUp = new GridBagConstraints();
 		gbc_lblSignUp.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblSignUp.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSignUp.insets = new Insets(0, 0, 0, 5);
 		gbc_lblSignUp.gridx = 3;
 		gbc_lblSignUp.gridy = 6;
 		add(lblSignUp, gbc_lblSignUp);

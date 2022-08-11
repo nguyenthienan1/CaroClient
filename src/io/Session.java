@@ -42,7 +42,8 @@ public class Session {
 		if (connected) {
 			try {
 				DataQueue.put(m);
-			} catch (Exception ignored) {
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -64,7 +65,7 @@ public class Session {
 			DataQueue.clear();
 			dos = null;
 		}).start();
-		// System.out.println("Finish Send Thread");
+		//System.out.println("Finish Send Thread");
 	}
 
 	private void receiveMessageThread() {
@@ -81,26 +82,36 @@ public class Session {
 			disconnect();
 			dis = null;
 		}).start();
-		// System.out.println("Finish Receive Thread");
+		//System.out.println("Finish Receive Thread");
 	}
 
-	private void doSendMessage(Message m) throws IOException {
+	private void doSendMessage(Message m) throws Exception {
 		dos.writeInt(m.command);
 		byte[] data = m.getData();
-		int size = data.length;
-		dos.writeInt(size);
-		if (size > 0) {
+		if (data != null) {
+			int size = data.length;
+			dos.writeInt(size);
 			dos.write(data);
+			//System.out.println("Send message: command (" + m.command + ") size [" + size + "]");
+		} else {
+			dos.writeInt(0);
 		}
+		dos.flush();
 	}
 
-	private Message readMessage() throws IOException {
+	private Message readMessage() throws Exception {
 		int cmd = dis.readInt();
 		int size = dis.readInt();
 		byte[] data = new byte[size];
-		if (size > 0) {
-			dis.read(data);
+		int len = 0;
+		int byteRead = 0;
+		while (len != -1 && byteRead < size) {
+			len = dis.read(data, byteRead, size - byteRead);
+			if (len > 0) {
+				byteRead += len;
+			}
 		}
+		//System.out.println("Receive message: command (" + cmd + ") size [" + size + "]");
 		return new Message(cmd, data);
 	}
 
