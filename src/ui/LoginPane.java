@@ -9,6 +9,8 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+
+import client.CaroClient;
 import client.SendMessage;
 
 import java.awt.event.ActionListener;
@@ -22,7 +24,7 @@ import java.awt.Insets;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class LoginUI extends JPanel {
+public class LoginPane extends JPanel {
 	private static final long serialVersionUID = 2542937514118548359L;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -37,7 +39,7 @@ public class LoginUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public LoginUI() {
+	public LoginPane() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 76, 82, 251, 55, 67, 0 };
 		gridBagLayout.rowHeights = new int[] { 27, 0, 42, 18, 42, 0, 29, 0 };
@@ -45,7 +47,7 @@ public class LoginUI extends JPanel {
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		lblNewLabel_1 = new JLabel("Login");
+		lblNewLabel_1 = new JLabel("LOGIN");
 		lblNewLabel_1.setForeground(new Color(199, 21, 133));
 		lblNewLabel_1.setFont(new Font("Segoe Script", Font.BOLD | Font.ITALIC, 26));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -55,7 +57,7 @@ public class LoginUI extends JPanel {
 		gbc_lblNewLabel_1.gridy = 0;
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-		lblNewLabel = new JLabel("Username:");
+		lblNewLabel = new JLabel("Tên tài khoản:");
 		lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -73,7 +75,7 @@ public class LoginUI extends JPanel {
 		gbc_tfUserName.gridx = 2;
 		gbc_tfUserName.gridy = 2;
 		add(tfUserName, gbc_tfUserName);
-		
+
 		verticalStrut = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
 		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);
@@ -81,7 +83,7 @@ public class LoginUI extends JPanel {
 		gbc_verticalStrut.gridy = 3;
 		add(verticalStrut, gbc_verticalStrut);
 
-		lblNewLabel_2 = new JLabel("Password:");
+		lblNewLabel_2 = new JLabel("Mật khẩu:");
 		lblNewLabel_2.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
@@ -99,7 +101,7 @@ public class LoginUI extends JPanel {
 		gbc_passwordField.gridy = 4;
 		add(passwordField, gbc_passwordField);
 
-		lblSignUp = new JLabel("Sign up?");
+		lblSignUp = new JLabel("Đăng ký?");
 		lblSignUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -117,35 +119,43 @@ public class LoginUI extends JPanel {
 				lblSignUp.setForeground(Color.BLUE);
 			}
 		});
-		
-				btnSignIn = new JButton("Sign in");
-				btnSignIn.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-				btnSignIn.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						String username = tfUserName.getText();
-						String password = String.valueOf(passwordField.getPassword());
-						username = username.trim();
-						password = password.trim();
-						if (username.equals("") || password.equals("")) {
-							JOptionPane.showMessageDialog(null, "Please input user name and password");
-						} else {
-							SendMessage.gI().login(username, password);
-						}
+
+		btnSignIn = new JButton("Đăng nhập");
+		btnSignIn.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		btnSignIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (!CaroClient.conn.connected) {
+						CaroClient.conn.connect("localhost", 8888);
 					}
-				});
-				
-				verticalStrut_1 = Box.createVerticalStrut(20);
-				GridBagConstraints gbc_verticalStrut_1 = new GridBagConstraints();
-				gbc_verticalStrut_1.insets = new Insets(0, 0, 5, 5);
-				gbc_verticalStrut_1.gridx = 2;
-				gbc_verticalStrut_1.gridy = 5;
-				add(verticalStrut_1, gbc_verticalStrut_1);
-				btnSignIn.setForeground(Color.BLACK);
-				GridBagConstraints gbc_btnSignIn = new GridBagConstraints();
-				gbc_btnSignIn.insets = new Insets(0, 0, 0, 5);
-				gbc_btnSignIn.gridx = 2;
-				gbc_btnSignIn.gridy = 6;
-				add(btnSignIn, gbc_btnSignIn);
+					String username = tfUserName.getText();
+					String password = String.valueOf(passwordField.getPassword());
+					username = username.trim();
+					password = password.trim();
+					if (username.equals("") || password.equals("")) {
+						JOptionPane.showMessageDialog(null, "Vui lòng nhập vào tên tài khoản");
+					} else {
+						SendMessage.gI().login(username, password);
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Không thể kết nối đến máy chủ, vui lòng thử lại sau");
+				}
+			}
+		});
+
+		verticalStrut_1 = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut_1 = new GridBagConstraints();
+		gbc_verticalStrut_1.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut_1.gridx = 2;
+		gbc_verticalStrut_1.gridy = 5;
+		add(verticalStrut_1, gbc_verticalStrut_1);
+		btnSignIn.setForeground(Color.BLACK);
+		GridBagConstraints gbc_btnSignIn = new GridBagConstraints();
+		gbc_btnSignIn.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSignIn.gridx = 2;
+		gbc_btnSignIn.gridy = 6;
+		add(btnSignIn, gbc_btnSignIn);
 		lblSignUp.setForeground(Color.RED);
 		lblSignUp.setFont(new Font("Segoe UI", Font.ITALIC, 18));
 		GridBagConstraints gbc_lblSignUp = new GridBagConstraints();

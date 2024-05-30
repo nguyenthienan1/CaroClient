@@ -42,6 +42,9 @@ public class HandleMessage extends Cmd_Server2Client {
 		case RESET_BOARD:
 			ReadMessage.gI().resetBoard();
 			break;
+		case LIST_PLAYER_ROOM:
+			ReadMessage.gI().updateListPlayer(m);
+			break;
 		}
 	}
 }

@@ -2,36 +2,38 @@ package client;
 
 import javax.swing.UIManager;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import io.Session;
 import mlib.MyImage;
 import mlib.MyWindow;
-import ui.ConnectUI;
-import ui.GameUI;
-import ui.LoginUI;
-import ui.RoomUI;
+import ui.ConnectPane;
+import ui.GamePane;
+import ui.LoginPane;
+import ui.ListRoomPane;
 
 public class CaroClient {
 	public static Session conn = new Session();
 	public static MyWindow window;
-	public static ConnectUI connectUI;
-	public static LoginUI loginUI;
-	public static RoomUI roomUI;
-	public static GameUI gameUI;
+	public static ConnectPane connectUI;
+	public static LoginPane loginUI;
+	public static ListRoomPane roomUI;
+	public static GamePane gameUI;
 
 	public static void main(String[] args) {
 		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			UIManager.setLookAndFeel(new FlatLightLaf());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		new MyImage().loadImage();
+		MyImage.loadImage();
 		window = new MyWindow();
-		connectUI = new ConnectUI();
-		loginUI = new LoginUI();
-		roomUI = new RoomUI();
-		gameUI = new GameUI();
-		
-		window.setContentPane(connectUI);
+		connectUI = new ConnectPane();
+		loginUI = new LoginPane();
+		roomUI = new ListRoomPane();
+		gameUI = new GamePane();
+
+		window.setContentPane(loginUI);
 		window.setVisible(true);
 	}
 }

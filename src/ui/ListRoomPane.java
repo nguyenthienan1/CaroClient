@@ -29,7 +29,7 @@ import javax.swing.JMenu;
 import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 
-public class RoomUI extends JPanel {
+public class ListRoomPane extends JPanel {
 	private static final long serialVersionUID = 2449280938065755409L;
 	private JScrollPane scrollPane;
 	private JButton btnCreateRoom;
@@ -44,11 +44,11 @@ public class RoomUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public RoomUI() {
+	public ListRoomPane() {
 		setLayout(new BorderLayout(0, 0));
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBorder(new TitledBorder(null, "List Room", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		scrollPane.setBorder(new TitledBorder(null, "Danh sách phòng", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		scrollPane.setEnabled(true);
 
 		jlistRoom = new JList<>();
@@ -62,7 +62,7 @@ public class RoomUI extends JPanel {
 		imenuMn = new JMenu("Menu");
 		menuBar_1.add(imenuMn);
 
-		mntmLogOut = new JMenuItem("Log out");
+		mntmLogOut = new JMenuItem("Đăng xuất");
 		mntmLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SendMessage.gI().logOut();
@@ -75,7 +75,7 @@ public class RoomUI extends JPanel {
 		flowLayout.setHgap(10);
 		add(panel, BorderLayout.SOUTH);
 
-		btnCreateRoom = new JButton("Create room");
+		btnCreateRoom = new JButton("Tạo phòng");
 		panel.add(btnCreateRoom);
 		btnCreateRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,20 +84,20 @@ public class RoomUI extends JPanel {
 		});
 		btnCreateRoom.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
-		btnJoinRoom = new JButton("Join room");
+		btnJoinRoom = new JButton("Vào phòng");
 		panel.add(btnJoinRoom);
 		btnJoinRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					SendMessage.gI().joinRoom(jlistRoom.getSelectedValue().getNumber());
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Please select room");
+					JOptionPane.showMessageDialog(null, "Vui lòng chọn phòng muốn vào");
 				}
 			}
 		});
 		btnJoinRoom.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
-		btnUpdateLRoom = new JButton("Update list room");
+		btnUpdateLRoom = new JButton("Cập nhật");
 		panel.add(btnUpdateLRoom);
 		btnUpdateLRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -143,9 +143,9 @@ public class RoomUI extends JPanel {
 		@Override
 		public Component getListCellRendererComponent(JList<? extends Room> list, Room value, int index,
 				boolean isSelected, boolean cellHasFocus) {
-			lbNumRoom.setText("Room " + value.getNumber());
-			lbNumPlayer.setText("Players: " + value.getNumOfPlayer());
-			lbStatus.setText("Status: " + value.getStatus());
+			lbNumRoom.setText("Phòng " + value.getNumber());
+			lbNumPlayer.setText("Số người trong phòng: " + value.getNumOfPlayer());
+			lbStatus.setText("Trạng thái: " + value.getStatus());
 
 			// set Opaque to change background color of JLabel
 			lbNumRoom.setOpaque(true);

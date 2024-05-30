@@ -9,10 +9,10 @@ public class MyImage {
 	public static Image imgX;
 	public static Image imgO;
 
-	public void loadImage() {
+	public static void loadImage() {
 		try {
-			imgX = ImageIO.read(getClass().getResource("/image/X.png"));
-			imgO = ImageIO.read(getClass().getResource("/image/O.png"));
+			imgX = ImageIO.read(MyImage.class.getResource("/image/X.png"));
+			imgO = ImageIO.read(MyImage.class.getResource("/image/O.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

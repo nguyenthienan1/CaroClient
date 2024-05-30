@@ -1,7 +1,6 @@
 package ui;
 
 import javax.swing.JPanel;
-import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -12,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Vector;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -22,12 +23,13 @@ import javax.swing.border.TitledBorder;
 import caro.Board;
 
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.BorderLayout;
+import javax.swing.JList;
+import javax.swing.BoxLayout;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
 
-public class GameUI extends JPanel {
+public class GamePane extends JPanel {
 	private static final long serialVersionUID = -9076187580180368445L;
 	private Board board;
 	private JButton btnReady;
@@ -39,31 +41,25 @@ public class GameUI extends JPanel {
 	private JTextArea textShowChat;
 	private JPanel panel_1;
 	private JMenuBar menuBar;
+	private JPanel panel;
+	private JScrollPane scrollPane_1;
+	private JList<String> listPlayer;
+	private JScrollPane scrollPane_2;
+	private JList<String> listSpecPlayer;
 
 	/**
 	 * Create the panel.
 	 */
-	public GameUI() {
+	public GamePane() {
 
 		board = new Board();
-		board.setBackground(new Color(238, 238, 238));
 
 		panel_1 = new JPanel();
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[] { 200, 0 };
-		gbl_panel_1.rowHeights = new int[] { 26, 452, 20, 26, 0 };
-		gbl_panel_1.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
-		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		panel_1.setLayout(gbl_panel_1);
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 
-		btnReady = new JButton("Ready");
+		btnReady = new JButton("Sẵn sàng");
 		btnReady.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		GridBagConstraints gbc_btnReady = new GridBagConstraints();
-		gbc_btnReady.anchor = GridBagConstraints.WEST;
-		gbc_btnReady.insets = new Insets(0, 0, 5, 0);
-		gbc_btnReady.gridx = 0;
-		gbc_btnReady.gridy = 0;
-		panel_1.add(btnReady, gbc_btnReady);
+		panel_1.add(btnReady);
 		btnReady.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SendMessage.gI().ready();
@@ -75,15 +71,11 @@ public class GameUI extends JPanel {
 		add(panel_1, BorderLayout.EAST);
 
 		scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 1;
-		panel_1.add(scrollPane, gbc_scrollPane);
+		panel_1.add(scrollPane);
 		scrollPane.setBorder(new TitledBorder(null, "Chat", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 		textShowChat = new JTextArea();
+		textShowChat.setRows(10);
 		textShowChat.setColumns(10);
 		textShowChat.setEditable(false);
 		textShowChat.setWrapStyleWord(true);
@@ -92,13 +84,10 @@ public class GameUI extends JPanel {
 		scrollPane.setViewportView(textShowChat);
 
 		textChat = new JTextField();
+		textChat.setMaximumSize(new Dimension(2147483647, 100));
+		textChat.setHorizontalAlignment(SwingConstants.LEFT);
 		textChat.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		GridBagConstraints gbc_textChat = new GridBagConstraints();
-		gbc_textChat.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textChat.insets = new Insets(0, 0, 5, 0);
-		gbc_textChat.gridx = 0;
-		gbc_textChat.gridy = 2;
-		panel_1.add(textChat, gbc_textChat);
+		panel_1.add(textChat);
 		textChat.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -109,13 +98,9 @@ public class GameUI extends JPanel {
 		});
 		textChat.setColumns(10);
 
-		btnSendChat = new JButton("Send");
+		btnSendChat = new JButton("Gửi");
 		btnSendChat.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		GridBagConstraints gbc_btnSendChat = new GridBagConstraints();
-		gbc_btnSendChat.anchor = GridBagConstraints.WEST;
-		gbc_btnSendChat.gridx = 0;
-		gbc_btnSendChat.gridy = 3;
-		panel_1.add(btnSendChat, gbc_btnSendChat);
+		panel_1.add(btnSendChat);
 
 		menuBar = new JMenuBar();
 		add(menuBar, BorderLayout.NORTH);
@@ -123,10 +108,10 @@ public class GameUI extends JPanel {
 		iMenuLeaveRoom = new JMenu("Menu");
 		menuBar.add(iMenuLeaveRoom);
 
-		mntmNewMenuItem = new JMenuItem("Leave room");
+		mntmNewMenuItem = new JMenuItem("Rời phòng");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int out = JOptionPane.showConfirmDialog(null, "Do you want out this room?", "Leave room",
+				int out = JOptionPane.showConfirmDialog(null, "Bạn có muốn rời phòng?", "Thông tin",
 						JOptionPane.YES_NO_OPTION);
 				if (out == JOptionPane.YES_OPTION) {
 					SendMessage.gI().leaveRoom();
@@ -134,6 +119,24 @@ public class GameUI extends JPanel {
 			}
 		});
 		iMenuLeaveRoom.add(mntmNewMenuItem);
+		
+		panel = new JPanel();
+		add(panel, BorderLayout.WEST);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBorder(new TitledBorder(null, "Người chơi", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.add(scrollPane_1);
+		
+		listPlayer = new JList<String>();
+		scrollPane_1.setViewportView(listPlayer);
+		
+		scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBorder(new TitledBorder(null, "Người xem", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.add(scrollPane_2);
+		
+		listSpecPlayer = new JList<String>();
+		scrollPane_2.setViewportView(listSpecPlayer);
 		btnSendChat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				eventSendChat();
@@ -167,5 +170,13 @@ public class GameUI extends JPanel {
 		board.matrix = new int[20][20];
 		board.flagPiece.setLocation(-1, -1);
 		board.repaint();
+	}
+	
+	public void updatePlayerRoom(Vector<String> players) {
+		listPlayer.setListData(players);
+	}
+	
+	public void updateSpectatingPlayer(Vector<String> players) {
+		listSpecPlayer.setListData(players);
 	}
 }

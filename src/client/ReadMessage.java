@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import caro.Room;
 import io.Message;
-import ui.GameUI;
+import ui.GamePane;
 
 public class ReadMessage {
 	private static ReadMessage instance;
@@ -49,8 +49,9 @@ public class ReadMessage {
 	public void joinRoomSuccess(Message m) {
 		try {
 			m.reader().readInt();
-			CaroClient.gameUI = new GameUI();
+			CaroClient.gameUI = new GamePane();
 			CaroClient.window.setContentPane(CaroClient.gameUI);
+			CaroClient.window.setBounds(CaroClient.window.getBounds().x, CaroClient.window.getBounds().y, 900, 700);
 		} catch (Exception e) {
 		}
 	}
@@ -86,6 +87,25 @@ public class ReadMessage {
 	public void resetBoard() {
 		if (CaroClient.window.getContentPane() == CaroClient.gameUI) {
 			CaroClient.gameUI.resetBoard();
+		}
+	}
+	
+	public void updateListPlayer(Message m) {
+		try {
+			int type = m.reader().readByte();
+			int size = m.reader().readInt();
+			Vector<String> players = new Vector<>();
+			for (int i = 0; i < size; i++) {
+				players.add(m.reader().readUTF());
+			}
+			
+			if (type == 0) {
+				CaroClient.gameUI.updatePlayerRoom(players);
+			} else if (type == 1){
+				CaroClient.gameUI.updateSpectatingPlayer(players);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

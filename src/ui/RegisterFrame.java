@@ -28,18 +28,18 @@ public class RegisterFrame extends JFrame {
 
 	public RegisterFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 486, 335);
+		setBounds(100, 100, 556, 401);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{105, 130, 113, 0};
 		gbl_contentPane.rowHeights = new int[]{20, 32, 20, 20, 20, 34, 23, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 						
-								JLabel lblNewLabel = new JLabel("Register");
+								JLabel lblNewLabel = new JLabel("ĐĂNG KÝ TÀI KHOẢN");
 								lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
 								GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 								gbc_lblNewLabel.fill = GridBagConstraints.VERTICAL;
@@ -48,7 +48,7 @@ public class RegisterFrame extends JFrame {
 								gbc_lblNewLabel.gridy = 0;
 								contentPane.add(lblNewLabel, gbc_lblNewLabel);
 				
-						JLabel lblNewLabel_1 = new JLabel("User name:");
+						JLabel lblNewLabel_1 = new JLabel("Tên tài khoản:");
 						lblNewLabel_1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 						GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 						gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
@@ -69,7 +69,7 @@ public class RegisterFrame extends JFrame {
 				contentPane.add(textFieldUsername, gbc_textFieldUsername);
 				textFieldUsername.setColumns(10);
 						
-								JLabel lblNewLabel_2 = new JLabel("Password:");
+								JLabel lblNewLabel_2 = new JLabel("Mật khẩu:");
 								lblNewLabel_2.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 								GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 								gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
@@ -89,7 +89,7 @@ public class RegisterFrame extends JFrame {
 						gbc_passwordField.gridy = 3;
 						contentPane.add(passwordField, gbc_passwordField);
 		
-				JLabel lblNewLabel_3 = new JLabel("Re enter password:");
+				JLabel lblNewLabel_3 = new JLabel("Nhập lại mật khẩu:");
 				lblNewLabel_3.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 				gbc_lblNewLabel_3.fill = GridBagConstraints.BOTH;
@@ -98,7 +98,7 @@ public class RegisterFrame extends JFrame {
 				gbc_lblNewLabel_3.gridy = 4;
 				contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-				JButton btnNewButton = new JButton("Sign up");
+				JButton btnNewButton = new JButton("Đăng kí");
 				btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -106,7 +106,7 @@ public class RegisterFrame extends JFrame {
 						String pass = String.valueOf(passwordField.getPassword());
 						String repass = String.valueOf(passwordFieldReEnter.getPassword());
 						if (name.equals("") || pass.equals("") || repass.equals("")) {
-							JOptionPane.showMessageDialog(null, "Please input username and password");
+							JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin đăng ký");
 							return;
 						}
 						SendMessage.gI().register(name, pass, repass);

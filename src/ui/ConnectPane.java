@@ -17,7 +17,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class ConnectUI extends JPanel {
+public class ConnectPane extends JPanel {
 	private static final long serialVersionUID = -8529188793389411079L;
 	private JLabel lblNewLabel;
 	private JTextField textFieldIp;
@@ -29,7 +29,7 @@ public class ConnectUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ConnectUI() {
+	public ConnectPane() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 113, 64, 231, 117, 0 };
 		gridBagLayout.rowHeights = new int[] { 83, 38, 36, 28, 0 };
@@ -87,7 +87,7 @@ public class ConnectUI extends JPanel {
 		gbc_textFieldPort.gridy = 2;
 		add(textFieldPort, gbc_textFieldPort);
 
-		btnNewButton = new JButton("Connect");
+		btnNewButton = new JButton("Kết nối");
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,15 +95,15 @@ public class ConnectUI extends JPanel {
 					String ip = textFieldIp.getText();
 					int port = Integer.parseInt(textFieldPort.getText());
 					if (!CaroClient.conn.connected) {
-						CaroClient.conn.Connect(ip, port);
-						JOptionPane.showMessageDialog(null, "Connect success");
+						CaroClient.conn.connect(ip, port);
+						JOptionPane.showMessageDialog(null, "Kết nối thành công");
 						CaroClient.window.setContentPane(CaroClient.loginUI);
 					} else {
-						JOptionPane.showMessageDialog(null, "You are already connected");
+						JOptionPane.showMessageDialog(null, "Bạn đã kết nối rồi");
 						CaroClient.window.setContentPane(CaroClient.loginUI);
 					}
 				} catch (IOException ex) {
-					JOptionPane.showMessageDialog(null, "Can't connect to server, check ip and port then try again");
+					JOptionPane.showMessageDialog(null, "Không thể kết nối đến máy chủ, vui lòng thử lại sau");
 				}
 			}
 		});

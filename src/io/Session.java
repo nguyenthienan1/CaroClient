@@ -16,12 +16,12 @@ public class Session {
 	private DataInputStream dis = null;
 	private DataOutputStream dos = null;
 	public boolean connected;
-	private final BlockingQueue<Message> DataQueue = new ArrayBlockingQueue<>(64);
+	private final BlockingQueue<Message> dataQueue = new ArrayBlockingQueue<>(64);
 
 	public Session() {
 	}
 
-	public void Connect(String ip, int port) throws IOException {
+	public void connect(String ip, int port) throws IOException {
 		if (!connected) {
 			socket = new Socket(ip, port);
 			connected = true;
@@ -41,7 +41,7 @@ public class Session {
 	public void sendMessage(Message m) {
 		if (connected) {
 			try {
-				DataQueue.put(m);
+				dataQueue.put(m);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -53,7 +53,7 @@ public class Session {
 			Message m;
 			try {
 				while (connected) {
-					m = DataQueue.poll(5, TimeUnit.SECONDS);
+					m = dataQueue.poll(5, TimeUnit.SECONDS);
 					if (m != null) {
 						doSendMessage(m);
 					}
@@ -62,7 +62,7 @@ public class Session {
 				e.printStackTrace();
 			}
 			disconnect();
-			DataQueue.clear();
+			dataQueue.clear();
 			dos = null;
 		}).start();
 		//System.out.println("Finish Send Thread");

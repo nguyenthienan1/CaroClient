@@ -20,11 +20,11 @@ public class Room {
 	}
 
 	public String getStatus() {
-		return status ? "fighting" : "waiting";
+		return status ? "Đã bắt đầu" : "Đang chờ";
 	}
 
 	@Override
 	public String toString() {
-		return "Room number: " + roomNumber + " - " + "Number of players: " + numPlayers;
+		return "Phòng: " + roomNumber + " - " + "Số người chơi: " + numPlayers;
 	}
 }
