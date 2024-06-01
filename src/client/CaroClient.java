@@ -7,7 +7,6 @@ import com.formdev.flatlaf.FlatLightLaf;
 import io.Session;
 import mlib.MyImage;
 import mlib.MyWindow;
-import ui.ConnectPane;
 import ui.GamePane;
 import ui.LoginPane;
 import ui.ListRoomPane;
@@ -15,7 +14,6 @@ import ui.ListRoomPane;
 public class CaroClient {
 	public static Session conn = new Session();
 	public static MyWindow window;
-	public static ConnectPane connectUI;
 	public static LoginPane loginUI;
 	public static ListRoomPane roomUI;
 	public static GamePane gameUI;
@@ -28,7 +26,6 @@ public class CaroClient {
 		}
 		MyImage.loadImage();
 		window = new MyWindow();
-		connectUI = new ConnectPane();
 		loginUI = new LoginPane();
 		roomUI = new ListRoomPane();
 		gameUI = new GamePane();

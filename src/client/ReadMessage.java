@@ -108,5 +108,14 @@ public class ReadMessage {
 			e.printStackTrace();
 		}
 	}
+	
+	public void updateLabelInfoRoom(Message m) {
+		try {
+			String info = m.reader().readUTF();
+			CaroClient.gameUI.setInfo(info);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

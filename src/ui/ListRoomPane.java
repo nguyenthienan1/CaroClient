@@ -45,6 +45,7 @@ public class ListRoomPane extends JPanel {
 	 * Create the panel.
 	 */
 	public ListRoomPane() {
+		setBackground(new Color(146, 168, 209));
 		setLayout(new BorderLayout(0, 0));
 
 		scrollPane = new JScrollPane();
@@ -52,6 +53,7 @@ public class ListRoomPane extends JPanel {
 		scrollPane.setEnabled(true);
 
 		jlistRoom = new JList<>();
+		jlistRoom.setBackground(new Color(255, 255, 255));
 		jlistRoom.setCellRenderer(new RoomRenderer());
 		scrollPane.setViewportView(jlistRoom);
 		add(scrollPane, BorderLayout.CENTER);
@@ -71,6 +73,7 @@ public class ListRoomPane extends JPanel {
 		imenuMn.add(mntmLogOut);
 
 		panel = new JPanel();
+		panel.setBackground(new Color(240, 240, 240));
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setHgap(10);
 		add(panel, BorderLayout.SOUTH);

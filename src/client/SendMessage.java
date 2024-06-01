@@ -3,10 +3,10 @@ package client;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import io.Cmd_Client2Server;
+import static io.Cmd_Client2Server.*;
 import io.Message;
 
-public class SendMessage extends Cmd_Client2Server {
+public class SendMessage {
 	private static SendMessage instance;
 	private Message message = null;
 
@@ -113,6 +113,14 @@ public class SendMessage extends Cmd_Client2Server {
 	public void ready() {
 		try {
 			init(READY);
+			send();
+		} catch (Exception e) {
+		}
+	}
+	
+	public void addBot() {
+		try {
+			init(ADD_BOT);
 			send();
 		} catch (Exception e) {
 		}

@@ -67,14 +67,14 @@ public class Board extends JPanel {
 	private void paintPiece(Graphics g) {
 		int cellSize = getCellSize();
 		try {
-			Image X = MyImage.imgX.getScaledInstance(cellSize - 1, cellSize - 1, Image.SCALE_SMOOTH);
-			Image O = MyImage.imgO.getScaledInstance(cellSize - 1, cellSize - 1, Image.SCALE_SMOOTH);
+			Image X = MyImage.imgX.getScaledInstance(cellSize - 10, cellSize - 10, Image.SCALE_SMOOTH);
+			Image O = MyImage.imgO.getScaledInstance(cellSize - 10, cellSize - 10, Image.SCALE_SMOOTH);
 			for (int i = 0; i < matrix.length; i++) {
 				for (int j = 0; j < matrix[i].length; j++) {
 					if (matrix[i][j] == 1) {
-						g.drawImage(X, i * cellSize + 1, j * cellSize + 1, null);
+						g.drawImage(X, i * cellSize + 5, j * cellSize + 5, null);
 					} else if (matrix[i][j] == 2) {
-						g.drawImage(O, i * cellSize + 1, j * cellSize + 1, null);
+						g.drawImage(O, i * cellSize + 5, j * cellSize + 5, null);
 					}
 				}
 			}

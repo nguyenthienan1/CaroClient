@@ -40,6 +40,7 @@ public class LoginPane extends JPanel {
 	 * Create the panel.
 	 */
 	public LoginPane() {
+		setBackground(new Color(146, 168, 209));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 76, 82, 251, 55, 67, 0 };
 		gridBagLayout.rowHeights = new int[] { 27, 0, 42, 18, 42, 0, 29, 0 };

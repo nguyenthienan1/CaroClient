@@ -122,8 +122,8 @@ public class Session {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(null, "Error connect to server");
-			CaroClient.window.setContentPane(CaroClient.connectUI);
+			JOptionPane.showMessageDialog(null, "Mất kết nối đến máy chủ");
+			CaroClient.window.setContentPane(CaroClient.loginUI);
 			connected = false;
 		}
 	}

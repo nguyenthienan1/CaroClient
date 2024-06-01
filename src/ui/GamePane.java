@@ -27,16 +27,23 @@ import java.awt.BorderLayout;
 import javax.swing.JList;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.Dimension;
+import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GamePane extends JPanel {
 	private static final long serialVersionUID = -9076187580180368445L;
-	private Board board;
 	private JButton btnReady;
 	private JTextField textChat;
 	private JButton btnSendChat;
 	private JMenu iMenuLeaveRoom;
 	private JMenuItem mntmNewMenuItem;
+	private JMenuItem menuAddBot;
 	private JScrollPane scrollPane;
 	private JTextArea textShowChat;
 	private JPanel panel_1;
@@ -46,15 +53,17 @@ public class GamePane extends JPanel {
 	private JList<String> listPlayer;
 	private JScrollPane scrollPane_2;
 	private JList<String> listSpecPlayer;
+	private Board board;
+	private JLabel labelnfo;
 
 	/**
 	 * Create the panel.
 	 */
 	public GamePane() {
-
-		board = new Board();
+		setBackground(new Color(146, 168, 209));
 
 		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(146, 168, 209));
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 
 		btnReady = new JButton("Sẵn sàng");
@@ -66,8 +75,6 @@ public class GamePane extends JPanel {
 			}
 		});
 		setLayout(new BorderLayout(10, 10));
-		add(board, BorderLayout.CENTER);
-		board.setLayout(null);
 		add(panel_1, BorderLayout.EAST);
 
 		scrollPane = new JScrollPane();
@@ -108,6 +115,15 @@ public class GamePane extends JPanel {
 		iMenuLeaveRoom = new JMenu("Menu");
 		menuBar.add(iMenuLeaveRoom);
 
+		menuAddBot = new JMenuItem("Thêm máy");
+		menuAddBot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SendMessage.gI().addBot();
+			}
+		});
+
+		iMenuLeaveRoom.add(menuAddBot);
+
 		mntmNewMenuItem = new JMenuItem("Rời phòng");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -119,29 +135,52 @@ public class GamePane extends JPanel {
 			}
 		});
 		iMenuLeaveRoom.add(mntmNewMenuItem);
-		
+
 		panel = new JPanel();
+		panel.setBackground(new Color(146, 168, 209));
 		add(panel, BorderLayout.WEST);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		
+
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBorder(new TitledBorder(null, "Người chơi", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		scrollPane_1
+				.setBorder(new TitledBorder(null, "Người chơi", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(scrollPane_1);
-		
+
 		listPlayer = new JList<String>();
 		scrollPane_1.setViewportView(listPlayer);
-		
+
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBorder(new TitledBorder(null, "Người xem", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(scrollPane_2);
-		
+
 		listSpecPlayer = new JList<String>();
 		scrollPane_2.setViewportView(listSpecPlayer);
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(146, 168, 209));
+		add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
+
+		labelnfo = new JLabel("fasdfasdfa");
+		labelnfo.setBackground(new Color(192, 192, 192));
+		labelnfo.setAlignmentX(Component.CENTER_ALIGNMENT);
+		labelnfo.setForeground(new Color(220, 20, 60));
+		labelnfo.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 22));
+		panel_2.add(labelnfo);
+
+		board = new Board();
+		board.setBackground(new Color(146, 168, 209));
+		board.setLayout(null);
+		panel_2.add(board);
 		btnSendChat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				eventSendChat();
 			}
 		});
+	}
+
+	public void setInfo(String info) {
+		labelnfo.setText(info);
 	}
 
 	private void eventSendChat() {
@@ -171,11 +210,11 @@ public class GamePane extends JPanel {
 		board.flagPiece.setLocation(-1, -1);
 		board.repaint();
 	}
-	
+
 	public void updatePlayerRoom(Vector<String> players) {
 		listPlayer.setListData(players);
 	}
-	
+
 	public void updateSpectatingPlayer(Vector<String> players) {
 		listSpecPlayer.setListData(players);
 	}

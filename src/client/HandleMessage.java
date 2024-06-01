@@ -1,9 +1,9 @@
 package client;
 
-import io.Cmd_Server2Client;
+import static io.Cmd_Server2Client.*;
 import io.Message;
 
-public class HandleMessage extends Cmd_Server2Client {
+public class HandleMessage {
 	private static HandleMessage instance;
 
 	public static HandleMessage gI() {
@@ -44,6 +44,9 @@ public class HandleMessage extends Cmd_Server2Client {
 			break;
 		case LIST_PLAYER_ROOM:
 			ReadMessage.gI().updateListPlayer(m);
+			break;
+		case INFO_IN_ROOM:
+			ReadMessage.gI().updateLabelInfoRoom(m);
 			break;
 		}
 	}
