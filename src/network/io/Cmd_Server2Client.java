@@ -1,4 +1,4 @@
-package io;
+package network.io;
 
 public class Cmd_Server2Client {
 	public static final int LOGIN = 0;

@@ -4,9 +4,9 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-import io.Session;
 import mlib.MyImage;
 import mlib.MyWindow;
+import network.Session;
 import ui.GamePane;
 import ui.LoginPane;
 import ui.ListRoomPane;

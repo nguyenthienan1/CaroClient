@@ -2,8 +2,8 @@ package caro;
 
 import javax.swing.JPanel;
 
-import client.SendMessage;
 import mlib.MyImage;
+import network.logic.SendMessage;
 
 import java.awt.Color;
 import java.awt.Graphics;

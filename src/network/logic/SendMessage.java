@@ -1,10 +1,12 @@
-package client;
+package network.logic;
+
+import static network.io.Cmd_Client2Server.*;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import static io.Cmd_Client2Server.*;
-import io.Message;
+import client.CaroClient;
+import network.io.Message;
 
 public class SendMessage {
 	private static SendMessage instance;

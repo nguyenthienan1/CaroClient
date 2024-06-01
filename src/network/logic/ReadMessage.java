@@ -1,4 +1,4 @@
-package client;
+package network.logic;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -6,7 +6,8 @@ import java.util.Vector;
 import javax.swing.*;
 
 import caro.Room;
-import io.Message;
+import client.CaroClient;
+import network.io.Message;
 import ui.GamePane;
 
 public class ReadMessage {

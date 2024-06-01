@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
 import client.CaroClient;
-import client.SendMessage;
+import network.logic.SendMessage;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

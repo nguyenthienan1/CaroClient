@@ -1,7 +1,8 @@
-package client;
+package network.logic;
 
-import static io.Cmd_Server2Client.*;
-import io.Message;
+import static network.io.Cmd_Server2Client.*;
+
+import network.io.Message;
 
 public class HandleMessage {
 	private static HandleMessage instance;

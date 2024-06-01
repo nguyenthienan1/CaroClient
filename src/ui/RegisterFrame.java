@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import client.SendMessage;
+import network.logic.SendMessage;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

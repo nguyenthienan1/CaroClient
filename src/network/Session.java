@@ -1,4 +1,4 @@
-package io;
+package network;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,7 +9,8 @@ import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 
 import client.CaroClient;
-import client.HandleMessage;
+import network.io.Message;
+import network.logic.HandleMessage;
 
 public class Session {
 	public Socket socket;

@@ -5,8 +5,6 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import client.SendMessage;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -21,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 import caro.Board;
+import network.logic.SendMessage;
 
 import java.awt.Font;
 import java.awt.BorderLayout;

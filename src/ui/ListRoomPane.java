@@ -15,7 +15,7 @@ import java.awt.GridLayout;
 import javax.swing.border.EmptyBorder;
 
 import caro.Room;
-import client.SendMessage;
+import network.logic.SendMessage;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
